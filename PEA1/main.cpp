@@ -11,7 +11,14 @@ int main()
     cout << "Witam w projekcie PEA 1"<<endl;
     cout << "Wprowadz nazwe pliku"<<endl;
     cin>>loc;
-    BB.ReadFromFile(loc);
-    BB.Print();
+    bool isReaded = BB.ReadFromFile(loc);
+
+    if(isReaded) {
+      BB.PrintGraph();
+      BB.SolveTSP();
+      BB.PrintSolution();
+      cout<<"Wczytano";
+    }
+
     return 0;
 }
