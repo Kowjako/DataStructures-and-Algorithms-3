@@ -27,6 +27,7 @@ bool BranchBound::ReadFromFile(string filename)
 
       for(int i = 0;i<this->node_num;i++)           /* uzupelnianie macierzy sasiedztwa */
       {
+         this->macierz[i] = new int[this->node_num];
          for(int j = 0;j<this->node_num;j++)
          {
             file >> distance;
@@ -52,7 +53,7 @@ void BranchBound::Print()
 {
    for(int i=0;i<node_num;i++) {
         for(int j = 0;j<node_num;j++)
-            cout<<this->macierz[i][j]<<" ";
+            cout<<this->macierz[i][j]<<'\t';
         cout<<endl;
    }
 }
