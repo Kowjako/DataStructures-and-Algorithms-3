@@ -17,15 +17,18 @@ class BranchBound
        public:
               BranchBound();
               virtual ~BranchBound();
+
               void PrintGraph();
               void PrintSolution();
+
               void SolveTSP();
+
               void HighLimit(Node node);
               int LowLimit(Node node, int next);
+
               void Start(Node node);
 
               bool ReadFromFile(string filename);
-
 
        protected:
 

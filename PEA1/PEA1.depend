@@ -14,10 +14,10 @@
 	<iostream>
 	"branchbound.h"
 
-1633786942 source:c:\users\123\desktop\pea\part1\pea1\branchbound.cpp
+1633813526 source:c:\users\123\desktop\pea\part1\pea1\branchbound.cpp
 	"branchbound.h"
 
-1633787600 c:\users\123\desktop\pea\part1\pea1\branchbound.h
+1633814942 c:\users\123\desktop\pea\part1\pea1\branchbound.h
 	<iostream>
 	<fstream>
 	<stack>
@@ -31,7 +31,7 @@
 	<iostream>
 	"branchbound.h"
 
-1633785035 c:\users\123\desktop\pea\part1\pea1\node.h
+1633812372 c:\users\123\desktop\pea\part1\pea1\node.h
 
 1633784988 source:c:\users\123\desktop\pea\part1\pea1\node.cpp
 	"node.h"

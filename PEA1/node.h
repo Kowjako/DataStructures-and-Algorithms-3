@@ -11,6 +11,7 @@ class Node
       int ograniczenie = 0;
       int value = 0;
 
+
    protected:
 
    private:
