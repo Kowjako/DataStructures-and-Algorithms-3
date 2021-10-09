@@ -17,7 +17,6 @@ int main()
       BB.PrintGraph();
       BB.SolveTSP();
       BB.PrintSolution();
-      cout<<"Wczytano";
     }
 
     return 0;

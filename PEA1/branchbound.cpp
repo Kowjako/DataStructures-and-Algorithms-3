@@ -67,13 +67,13 @@ void BranchBound::PrintSolution()
 {
    cout<<"Minimalna dlugosc wynosi : "<<this->ograniczenieGorne<<endl;
    cout<<"Sciezka : ";
+   cout<<"0 ";
    while(!this->finalPath.empty())
    {
       int value = finalPath.top();  /* pobieramy wierzcholek */
       cout<<value<<" ";             /* wyswietlamy */
       finalPath.pop();              /* usuwamy */
    }
-   cout<<" 0 "<<endl;
 }
 
 
