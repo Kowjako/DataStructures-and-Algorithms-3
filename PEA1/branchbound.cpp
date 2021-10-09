@@ -79,6 +79,7 @@ void BranchBound::PrintSolution()
 
 void BranchBound::SolveTSP()
 {
+   int ograniczenieStartowe = 0;
    /* Ustawienie ograniczenia dolnego */
    int minimum = INT_MAX;
    for(int i=0;i<this->node_num;i++)
@@ -92,13 +93,13 @@ void BranchBound::SolveTSP()
          }
       }
       this->minimumTab[i] = minimum;
-      this->ograniczenieDolne += minimum;     /* ograniczenie dolne ustawiam jako minimalne wartosci drog kazdego z wierzcholkow */
+      ograniczenieStartowe += minimum;     /* ograniczenie dolne ustawiam jako minimalne wartosci drog kazdego z wierzcholkow */
       minimum = INT_MAX;
    }
 
    Node startNode;      /* wierzcholek poczatkowy */
    startNode.value = 0;
-   startNode.ograniczenie = this->ograniczenieDolne; /*wpisujemy mu ograniczenie dolne na wyliczone powyzej */
+   startNode.ograniczenie = ograniczenieStartowe; /*wpisujemy mu ograniczenie dolne na wyliczone powyzej */
    Start(startNode);
 
 }
@@ -153,7 +154,7 @@ void BranchBound::Start(Node startNode)
 
             if(tmp.ograniczenie < this->ograniczenieGorne)
             {
-               Start(tmp);
+               Start(tmp); /* znaczy ta sciezka ma sens i musimy ja sprawdzic */
             }
             else
             {

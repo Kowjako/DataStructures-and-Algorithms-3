@@ -8,7 +8,6 @@ class Node
       Node();
       virtual ~Node();
 
-      Node* next;
       int ograniczenie = 0;
       int value = 0;
 

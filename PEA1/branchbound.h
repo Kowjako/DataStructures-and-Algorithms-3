@@ -33,7 +33,6 @@ class BranchBound
               int node_num = 0;
 
               int ograniczenieGorne = INT_MAX;
-              int ograniczenieDolne;
 
               stack<int> actualPath;
               stack<int> finalPath;
