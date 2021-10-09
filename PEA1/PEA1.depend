@@ -14,18 +14,25 @@
 	<iostream>
 	"branchbound.h"
 
-1633776733 source:c:\users\123\desktop\pea\part1\pea1\branchbound.cpp
+1633786942 source:c:\users\123\desktop\pea\part1\pea1\branchbound.cpp
 	"branchbound.h"
 
-1633776163 c:\users\123\desktop\pea\part1\pea1\branchbound.h
+1633786879 c:\users\123\desktop\pea\part1\pea1\branchbound.h
 	<iostream>
 	<fstream>
 	<stack>
+	<queue>
 	<algorithm>
 	<stdlib.h>
 	<time.h>
+	"node.h"
 
-1633775268 source:c:\users\123\desktop\pea\part1\pea1\main.cpp
+1633786975 source:c:\users\123\desktop\pea\part1\pea1\main.cpp
 	<iostream>
 	"branchbound.h"
+
+1633785035 c:\users\123\desktop\pea\part1\pea1\node.h
+
+1633784988 source:c:\users\123\desktop\pea\part1\pea1\node.cpp
+	"node.h"
 
