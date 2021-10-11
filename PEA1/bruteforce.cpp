@@ -69,7 +69,7 @@ void BruteForce::PrintGraph()
 
 void BruteForce::PrintSolution()
 {
-
+   cout<<"Najkrotsza sciezka : "<<this->minPath<<endl;
 }
 
 void BruteForce::Start()
@@ -97,8 +97,22 @@ void BruteForce::StartBrute(int nodeNumber)
          this->minPath = path;
          for(int i=0;i<this->node_num;i++)
          {
-            this->finalPermutation[i] = tmpPermutation[i];
+            this->finalPermutation[i] = tmpPermutation[i];  /* uaktualniamy najlepsza sciezke */
          }
+      }
+   }
+   else
+   {
+      for(int i = nodeNumber;i<this->node_num;i++)
+      {
+         int tmp = this->tmpPermutation[i];
+         this->tmpPermutation[i] = this->tmpPermutation[nodeNumber];
+         this->tmpPermutation[nodeNumber] = tmp;
+         StartBrute(nodeNumber + 1);
+
+         tmp = this->tmpPermutation[i];
+         this->tmpPermutation[i] = this->tmpPermutation[nodeNumber];
+         this->tmpPermutation[nodeNumber] = tmp;
       }
    }
 }

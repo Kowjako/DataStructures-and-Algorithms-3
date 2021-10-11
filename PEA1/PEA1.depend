@@ -27,7 +27,7 @@
 	<time.h>
 	"node.h"
 
-1633958260 source:c:\users\123\desktop\pea\part1\pea1\main.cpp
+1633960533 source:c:\users\123\desktop\pea\part1\pea1\main.cpp
 	<iostream>
 	"branchbound.h"
 	"bruteforce.h"
@@ -46,4 +46,7 @@
 	<stdlib.h>
 	<time.h>
 	"node.h"
+
+1633960563 source:c:\users\123\desktop\pea\part1\pea1\bruteforce.cpp
+	"bruteforce.h"
 

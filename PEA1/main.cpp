@@ -20,6 +20,8 @@ int main()
       //BB.SolveTSP();
       //BB.PrintSolution();
       BF.PrintGraph();
+      BF.Start();
+      BF.PrintSolution();
     }
 
     return 0;
