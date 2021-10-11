@@ -28,8 +28,8 @@ bool BruteForce::ReadFromFile(string filename)
       int distance;
       file>>this->node_num;                           /* inicjalizacja liczby wierzcholkow */
 
-      this->finalPermutation = new int*[this->node_num];   /* inicjalizacja miejsca dla koncowej permutacji */
-      this->tmpPermutation = new int*[this->node_num];   /* inicjalizacja miejsca dla chwilowej permutacji */
+      this->finalPermutation = new int[this->node_num];   /* inicjalizacja miejsca dla koncowej permutacji */
+      this->tmpPermutation = new int[this->node_num];   /* inicjalizacja miejsca dla chwilowej permutacji */
 
       if(file.fail())
       {
@@ -83,5 +83,22 @@ void BruteForce::Start()
 
 void BruteForce::StartBrute(int nodeNumber)
 {
+   int path = 0;
+   if(nodeNumber == this->node_num) /*znaczy ta permutacja doszla do konca i musimy zaktualizowac sciezke */
+   {
+      for(int i=0;i<this->node_num-1;i++)
+      {
+         path += this->macierz[this->tmpPermutation[i]][this->tmpPermutation[i+1]];
+      }
+      path += this->macierz[this->tmpPermutation[this->node_num - 1]][this->tmpPermutation[0]];    /* dodanie dlugosci do korzenia*/
 
+      if(path < this->minPath)   /*czy ta sciezka jest lepsza niz aktualna */
+      {
+         this->minPath = path;
+         for(int i=0;i<this->node_num;i++)
+         {
+            this->finalPermutation[i] = tmpPermutation[i];
+         }
+      }
+   }
 }

@@ -28,7 +28,8 @@ class BruteForce
    private:
       int node_num = 0;
       int** macierz;  /* macierz sasiedztwa */
-      int* finalPermutation, tmpPermutation;
+      int* finalPermutation, *tmpPermutation;
+      int minPath = INT_MAX;     /* dlugosc sciezki */
       void SetValueForMatrix(int i, int j, int value);
 };
 
