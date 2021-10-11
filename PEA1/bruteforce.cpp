@@ -7,6 +7,9 @@ BruteForce::BruteForce()
 
 BruteForce::~BruteForce()
 {
+   delete[] this->tmpPermutation;
+   delete[] this->finalPermutation;
+
    for(int i=0;i<this->node_num ;i++)
         delete[] this->macierz[i];
        delete[] this->macierz;
@@ -24,6 +27,9 @@ bool BruteForce::ReadFromFile(string filename)
    {
       int distance;
       file>>this->node_num;                           /* inicjalizacja liczby wierzcholkow */
+
+      this->finalPermutation = new int*[this->node_num];   /* inicjalizacja miejsca dla koncowej permutacji */
+      this->tmpPermutation = new int*[this->node_num];   /* inicjalizacja miejsca dla chwilowej permutacji */
 
       if(file.fail())
       {
@@ -59,4 +65,23 @@ void BruteForce::PrintGraph()
             cout<<this->macierz[i][j]<<'\t';
         cout<<endl;
    }
+}
+
+void BruteForce::PrintSolution()
+{
+
+}
+
+void BruteForce::Start()
+{
+   for(int i=0;i<this->node_num;i++)
+   {
+      this->tmpPermutation[i] = i;                 /* inicjalizacja startowej permutacji */
+   }
+   StartBrute(1);
+}
+
+void BruteForce::StartBrute(int nodeNumber)
+{
+
 }

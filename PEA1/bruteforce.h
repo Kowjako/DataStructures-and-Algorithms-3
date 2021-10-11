@@ -19,12 +19,16 @@ class BruteForce
       bool ReadFromFile(string filename);
 
       void PrintGraph();
+      void PrintSolution();
+      void Start();
+      void StartBrute(int nodeNumber);
 
    protected:
 
    private:
       int node_num = 0;
       int** macierz;  /* macierz sasiedztwa */
+      int* finalPermutation, tmpPermutation;
       void SetValueForMatrix(int i, int j, int value);
 };
 
