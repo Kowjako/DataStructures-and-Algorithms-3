@@ -167,13 +167,13 @@ void BranchBound::Start(Node startNode)
             tmp = kolejka.top();  /* pobieramy wierzcholek z najmniejsza granica i od razu go usuwamy z kolejki */
             kolejka.pop();
 
-            if(tmp.ograniczenie < this->ograniczenieGorne)
+            if(tmp.ograniczenie <= this->ograniczenieGorne)
             {
                Start(tmp);  /* znaczy ta sciezka ma sens i musimy ja sprawdzic */
             }
             else
             {
-               break;      /* sciezka nie ma sensu wiec odrzucamy (ograniczenie) */
+               break;      /* sciezka nie ma sensu wiec odrzucamy (ograniczenie wieksze niz obecne) */
             }
          }
       }
