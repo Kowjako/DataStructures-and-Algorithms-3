@@ -84,7 +84,7 @@ void BruteForce::Start()
    {
       this->tmpPermutation[i] = i;                 /* inicjalizacja startowej permutacji */
    }
-   StartBrute(1);
+   StartBrute(1); /*zaczynamy od pierwszego wierzcholka bo 0 jest korzeniem*/
 }
 
 void BruteForce::StartBrute(int nodeNumber)
@@ -94,9 +94,9 @@ void BruteForce::StartBrute(int nodeNumber)
    {
       for(int i=0;i<this->node_num-1;i++)
       {
-         path += this->macierz[this->tmpPermutation[i]][this->tmpPermutation[i+1]];
+         path += this->macierz[this->tmpPermutation[i]][this->tmpPermutation[i+1]]; /*obliczamy droge danej permutacji */
       }
-      path += this->macierz[this->tmpPermutation[this->node_num - 1]][this->tmpPermutation[0]];    /* dodanie dlugosci do korzenia*/
+      path += this->macierz[this->tmpPermutation[this->node_num - 1]][this->tmpPermutation[0]];    /* dodanie dlugosci koncowy->poczatkowy*/
 
       if(path < this->minPath)   /*czy ta sciezka jest lepsza niz aktualna */
       {
@@ -111,14 +111,13 @@ void BruteForce::StartBrute(int nodeNumber)
    {
       for(int i = nodeNumber;i<this->node_num;i++)
       {
-         int tmp = this->tmpPermutation[i];
-         this->tmpPermutation[i] = this->tmpPermutation[nodeNumber];
-         this->tmpPermutation[nodeNumber] = tmp;
-         StartBrute(nodeNumber + 1);      /*rekurencyjnie zaczynamy od kolejnego wierzcholka */
+         if(i!=nodeNumber)
+            swap(this->tmpPermutation[i], this->tmpPermutation[nodeNumber]);
 
-         tmp = this->tmpPermutation[i];
-         this->tmpPermutation[i] = this->tmpPermutation[nodeNumber];
-         this->tmpPermutation[nodeNumber] = tmp;
+         StartBrute(nodeNumber + 1); /*rekurencyjnie zaczynamy od kolejnego wierzcholka */
+
+         if(i!=nodeNumber)
+               swap(this->tmpPermutation[i], this->tmpPermutation[nodeNumber]);
       }
    }
 }

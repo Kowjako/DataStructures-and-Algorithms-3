@@ -39,6 +39,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="node.cpp" />
 		<Unit filename="node.h" />
+		<Unit filename="bruteforce.cpp" />
+		<Unit filename="bruteforce.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
