@@ -7,7 +7,9 @@ DynamicProgramming::DynamicProgramming()
 
 DynamicProgramming::~DynamicProgramming()
 {
-   //dtor
+   for(int i=0;i<this->node_num ;i++)
+        delete[] this->macierz[i];
+       delete[] this->macierz;
 }
 
 bool DynamicProgramming::ReadFromFile()
@@ -66,13 +68,17 @@ void DynamicProgramming::PrintGraph()
 
 void DynamicProgramming::PrintSolution()
 {
+	stack<int> finalPath;
 	cout<<"Minimalna droga wynosi: ";
 	cout<<d[(1<<this->node_num - 1][0] << endl;
+	cout<<"Sciezka: ";
+	
+	bool* binaryPath = (1<<this->node_num) - 1;
 }
 
 void DynamicProgramming::Start()
 {
-	for(int mask = 0; mask < (1<<n); mask++)	/*sprawdzenie wszystkich masek od 0 do 2^n */
+	for(int mask = 0; mask < (1<<n); mask++)	/* iterowanie wszystkich masek od 0 do 2^n */
 	{
 		for(int i = 0;i<this->node_num;i++)	/* sprawdzenie miast od 0 do n */
 		{
@@ -80,7 +86,7 @@ void DynamicProgramming::Start()
 			for(int j = 0;j<this->node_num;j++)	/* miasto docelowe */
 			{
 				if(!(mask & (1<<j)))	/* dane miasto nie jest zawarte w aktualnej masce */
-					d[mask ^ (1<<j)][j] = min(d[mask ^ (1<<j)][j],d[mask][i] + a[i][j]); /* wybranie najlepszej sciezki */
+					d[mask ^ (1<<j)][j] = min(d[mask ^ (1<<j)][j],d[mask][i] + this->macierz[i][j]); /* wybranie najlepszej sciezki */
 			} 
 		}
 	}
