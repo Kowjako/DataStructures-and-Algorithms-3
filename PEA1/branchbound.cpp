@@ -155,7 +155,6 @@ void BranchBound::Start(Node startNode)
          }
       }
 
-
       if(kolejka.empty())
       {
          HighLimit(startNode);      /* Tu trafimy jezeli wszystkie wierzcholki beda zwiedzone -> trafilismy do liscia wiec ustawiamy gorne ograniczenie */

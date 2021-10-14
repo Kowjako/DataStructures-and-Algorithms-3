@@ -26,9 +26,11 @@ class DynamicProgramming
    protected:
    
    private:
+	  vector<vector<int>> d /* mozliwe drogi */
       int node_num = 0;
 	  int** macierz;
 	  void SetMatrixValue(int i, int j, int value);
+	  void InitializePathArray();
 };
 
 #endif // DYNAMICPROGRAMMING_H
