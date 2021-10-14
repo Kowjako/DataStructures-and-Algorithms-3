@@ -64,11 +64,17 @@ void DynamicProgramming::PrintGraph()
    }
 }
 
+void DynamicProgramming::PrintSolution()
+{
+	cout<<"Minimalna droga wynosi: ";
+	cout<<d[(1<<this->node_num - 1][0] << endl;
+}
+
 void DynamicProgramming::Start()
 {
 	for(int mask = 0; mask < (1<<n); mask++)	/*sprawdzenie wszystkich masek od 0 do 2^n */
 	{
-		for(int i =0;i<this->node_num;i++)	/* sprawdzenie miast od 0 do n */
+		for(int i = 0;i<this->node_num;i++)	/* sprawdzenie miast od 0 do n */
 		{
 			if(d[mask][i] == INT_MAX) continue;		
 			for(int j = 0;j<this->node_num;j++)	/* miasto docelowe */
