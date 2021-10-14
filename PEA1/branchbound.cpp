@@ -29,9 +29,6 @@ bool BranchBound::ReadFromFile(string filename)
          return false;
       }
 
-      string str;
-      getline(file,str);
-
       this->macierz = new int*[this->node_num];    /* alokacja macierzy sasiedztwa */
 
       for(int i = 0;i<this->node_num;i++)           /* uzupelnianie macierzy sasiedztwa */
