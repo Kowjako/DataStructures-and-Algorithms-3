@@ -36,11 +36,13 @@
 		</Compiler>
 		<Unit filename="branchbound.cpp" />
 		<Unit filename="branchbound.h" />
+		<Unit filename="bruteforce.cpp" />
+		<Unit filename="bruteforce.h" />
+		<Unit filename="dynamicprogramming.cpp" />
+		<Unit filename="dynamicprogramming.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="node.cpp" />
 		<Unit filename="node.h" />
-		<Unit filename="bruteforce.cpp" />
-		<Unit filename="bruteforce.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -12,7 +12,7 @@ DynamicProgramming::~DynamicProgramming()
        delete[] this->macierz;
 }
 
-bool DynamicProgramming::ReadFromFile()
+bool DynamicProgramming::ReadFromFile(string filename)
 {
    ifstream file(filename);
    if(file.is_open())
@@ -34,12 +34,9 @@ bool DynamicProgramming::ReadFromFile()
          for(int j = 0;j<this->node_num;j++)
          {
             file >> distance;
-            SetValueForMatrix(i,j, distance);
+            SetMatrixValue(i,j, distance);
          }
       }
-	  
-	  InitializePathArray();
-	  
       return true;
 
    }
@@ -57,7 +54,7 @@ void DynamicProgramming::InitializePathArray()
 	Start();
 }
 
-void DynamicProgramming::PrintGraph() 
+void DynamicProgramming::PrintGraph()
 {
 	for(int i=0;i<node_num;i++) {
         for(int j = 0;j<node_num;j++)
@@ -66,28 +63,33 @@ void DynamicProgramming::PrintGraph()
    }
 }
 
+void DynamicProgramming::SetMatrixValue(int i, int j, int value)
+{
+   this->macierz[i][j] = value;
+}
+
 void DynamicProgramming::PrintSolution()
 {
 	stack<int> finalPath;
 	cout<<"Minimalna droga wynosi: ";
-	cout<<d[(1<<this->node_num - 1][0] << endl;
+	cout<<d[(1<<this->node_num) - 1][0] << endl;
 	cout<<"Sciezka: ";
-	
-	bool* binaryPath = (1<<this->node_num) - 1;
+
+	//bool* binaryPath = (1<<this->node_num) - 1;
 }
 
 void DynamicProgramming::Start()
 {
-	for(int mask = 0; mask < (1<<n); mask++)	/* iterowanie wszystkich masek od 0 do 2^n */
+	for(int mask = 0; mask < (1<<this->node_num); mask++)	/* iterowanie wszystkich masek od 0 do 2^n */
 	{
 		for(int i = 0;i<this->node_num;i++)	/* sprawdzenie miast od 0 do n */
 		{
-			if(d[mask][i] == INT_MAX) continue;		
+			if(d[mask][i] == INT_MAX) continue;
 			for(int j = 0;j<this->node_num;j++)	/* miasto docelowe */
 			{
 				if(!(mask & (1<<j)))	/* dane miasto nie jest zawarte w aktualnej masce */
 					d[mask ^ (1<<j)][j] = min(d[mask ^ (1<<j)][j],d[mask][i] + this->macierz[i][j]); /* wybranie najlepszej sciezki */
-			} 
+			}
 		}
 	}
 	//d[mask][i]  -min droga jezeli odwiedzil mask miast i jest obecnie w i-tym miescie

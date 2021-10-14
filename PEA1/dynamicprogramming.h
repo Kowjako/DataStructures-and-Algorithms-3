@@ -15,22 +15,23 @@ class DynamicProgramming
    public:
       DynamicProgramming();
       virtual ~DynamicProgramming();
-	  
-	  void PrintGraph();
-	  void PrintSolution();
-	  
-	  void Start();
-	  
-	  bool ReadFromFile(string filename)
-	  
+
+      void PrintGraph();
+      void PrintSolution();
+
+      void InitializePathArray();
+      void Start();
+
+      bool ReadFromFile(string filename);
+
    protected:
-   
+
    private:
-	  vector<vector<int>> d /* mozliwe drogi */
-      int node_num = 0;
+	  vector<vector<int>> d; /* mozliwe drogi */
+     int node_num = 0;
 	  int** macierz;
 	  void SetMatrixValue(int i, int j, int value);
-	  void InitializePathArray();
+
 };
 
 #endif // DYNAMICPROGRAMMING_H
