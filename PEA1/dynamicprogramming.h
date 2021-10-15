@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>
+#include <bitset>
 
 using namespace std;
 class DynamicProgramming
@@ -28,8 +29,11 @@ class DynamicProgramming
 
    private:
 	  vector<vector<int>> d; /* mozliwe drogi */
+	  vector<vector<int>> track; /* tracking drogi */
      int node_num = 0;
 	  int** macierz;
+
+	  int lastNode;
 	  void SetMatrixValue(int i, int j, int value);
 
 };

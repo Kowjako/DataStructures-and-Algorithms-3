@@ -7,6 +7,7 @@ DynamicProgramming::DynamicProgramming()
 
 DynamicProgramming::~DynamicProgramming()
 {
+
    for(int i=0;i<this->node_num ;i++)
         delete[] this->macierz[i];
        delete[] this->macierz;
@@ -49,7 +50,13 @@ bool DynamicProgramming::ReadFromFile(string filename)
 
 void DynamicProgramming::InitializePathArray()
 {
-	this->d.resize((1<<this->node_num), vector<int>(this->node_num, INT_MAX));	/* inicjalizacja 2^n*n macierzy */
+	this->d.resize((1<<this->node_num), vector<int>(this->node_num, 9999));	/* inicjalizacja 2^n*n macierzy */
+	this->track.resize((1<<this->node_num), vector<int>(this->node_num, 9999));
+
+	for(int i=1;i<this->node_num;i++)
+   {
+      this->track[(1<<i) | 1][i] = 0;
+   }
 	this->d[0][0] = 0;
 	Start();
 }
@@ -70,27 +77,54 @@ void DynamicProgramming::SetMatrixValue(int i, int j, int value)
 
 void DynamicProgramming::PrintSolution()
 {
-	stack<int> finalPath;
 	cout<<"Minimalna droga wynosi: ";
 	cout<<d[(1<<this->node_num) - 1][0] << endl;
-	cout<<"Sciezka: ";
 
-	//bool* binaryPath = (1<<this->node_num) - 1;
+	int prev, actual = this->lastNode, mask = (1<<this->node_num) - 1;
+
+	cout<<"0 -> "<<this->lastNode<<" -> ";
+
+	 for(int i = this->node_num - 2;i>0;i--)
+   {
+      prev = this->track[mask][actual];
+      cout<<prev<<" -> ";
+      mask = mask ^ (1<<actual);
+      actual = prev;
+   }
+   cout<<"0"<<endl;
 }
+
+
 
 void DynamicProgramming::Start()
 {
+   int prevValue = 0;
 	for(int mask = 0; mask < (1<<this->node_num); mask++)	/* iterowanie wszystkich masek od 0 do 2^n */
 	{
 		for(int i = 0;i<this->node_num;i++)	/* sprawdzenie miast od 0 do n */
 		{
-			if(d[mask][i] == INT_MAX) continue;
+			if(d[mask][i] == 9999) continue;
 			for(int j = 0;j<this->node_num;j++)	/* miasto docelowe */
 			{
-				if(!(mask & (1<<j)))	/* dane miasto nie jest zawarte w aktualnej masce */
-					d[mask ^ (1<<j)][j] = min(d[mask ^ (1<<j)][j],d[mask][i] + this->macierz[i][j]); /* wybranie najlepszej sciezki */
+				if(!(mask & (1<<j)))  /* dane miasto nie jest zawarte w aktualnej masce */
+            {
+               prevValue = d[mask ^ (1<<j)][j];
+               d[mask ^ (1<<j)][j] = min(d[mask ^ (1<<j)][j],d[mask][i] + this->macierz[i][j]); /* wybranie najlepszej sciezki */
+
+               /** Jezeli strzal do finalnej komorki + zmiana wartosci **/
+               if(prevValue != d[mask ^ (1<<j)][j])
+               {
+                  if(mask ^ (1<<j) == (1<<this->node_num) - 1 && j == 0)
+                  {
+                     this->lastNode = i;  /* ustawiamy ostatni wierzcholek z ktorego osiagnieto 0 */
+                  }
+                  if(prevValue > d[mask ^ (1<<j)][j])
+                  {
+                     this->track[mask | (1<<j)][j] = i;
+                  }
+               }
+            }
 			}
 		}
 	}
-	//d[mask][i]  -min droga jezeli odwiedzil mask miast i jest obecnie w i-tym miescie
 }

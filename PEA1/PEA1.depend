@@ -24,11 +24,13 @@
 	<time.h>
 	"node.h"
 
-1634223106 source:c:\users\123\desktop\pea\part1\pea1\main.cpp
+1634327366 source:c:\users\123\desktop\pea\part1\pea1\main.cpp
 	<iostream>
 	"branchbound.h"
 	"bruteforce.h"
 	"dynamicprogramming.h"
+	<windows.h>
+	<iomanip>
 
 1633812372 c:\users\123\desktop\pea\part1\pea1\node.h
 
@@ -48,10 +50,10 @@
 1634221205 source:c:\users\123\desktop\pea\part1\pea1\bruteforce.cpp
 	"bruteforce.h"
 
-1634223089 source:c:\users\123\desktop\pea\part1\pea1\dynamicprogramming.cpp
+1634330170 source:c:\users\123\desktop\pea\part1\pea1\dynamicprogramming.cpp
 	"dynamicprogramming.h"
 
-1634223117 c:\users\123\desktop\pea\part1\pea1\dynamicprogramming.h
+1634326768 c:\users\123\desktop\pea\part1\pea1\dynamicprogramming.h
 	<iostream>
 	<fstream>
 	<stack>
@@ -59,6 +61,7 @@
 	<algorithm>
 	<stdlib.h>
 	<time.h>
+	<bitset>
 
 1634221208 source:c:\users\123\desktop\pea\part1\pea1\branchbound.cpp
 	"branchbound.h"
