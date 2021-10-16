@@ -39,6 +39,7 @@ int main()
       //DP.PrintGraph();
       //start = read_QPC();
       DP.InitializePathArray();
+      DP.PrintGraph();
       //elapsed = read_QPC() - start;
       DP.PrintSolution();
     }

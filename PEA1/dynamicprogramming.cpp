@@ -51,12 +51,21 @@ bool DynamicProgramming::ReadFromFile(string filename)
 void DynamicProgramming::InitializePathArray()
 {
 	this->d.resize((1<<this->node_num), vector<int>(this->node_num, 9999));	/* inicjalizacja 2^n*n macierzy */
-	this->track.resize((1<<this->node_num), vector<int>(this->node_num, 9999));
+	this->track.resize((1<<this->node_num), vector<int>(this->node_num, 9999999));
 
 	for(int i=1;i<this->node_num;i++)
    {
       this->track[(1<<i) | 1][i] = 0;
    }
+
+   /* test sciezek
+   for(int i=0;i<(1<<this->node_num);i++)
+   {
+      for(int j=0;j<this->node_num;j++)
+         cout<<track[i][j]<<" ";
+      cout<<endl;
+   }*/
+
 	this->d[0][0] = 0;
 	Start();
 }
@@ -84,7 +93,7 @@ void DynamicProgramming::PrintSolution()
 
 	cout<<"0 -> "<<this->lastNode<<" -> ";
 
-	 for(int i = this->node_num - 2;i>0;i--)
+   for(int i = this->node_num - 2;i>0;i--)
    {
       prev = this->track[mask][actual];
       cout<<prev<<" -> ";
@@ -108,7 +117,7 @@ void DynamicProgramming::Start()
 			{
 				if(!(mask & (1<<j)))  /* dane miasto nie jest zawarte w aktualnej masce */
             {
-               prevValue = d[mask ^ (1<<j)][j];
+               prevValue = d[mask ^ (1<<j)][j]; /* poprzednia wartosc podejrzanej komorki */
                d[mask ^ (1<<j)][j] = min(d[mask ^ (1<<j)][j],d[mask][i] + this->macierz[i][j]); /* wybranie najlepszej sciezki */
 
                /** Jezeli strzal do finalnej komorki + zmiana wartosci **/
@@ -118,9 +127,15 @@ void DynamicProgramming::Start()
                   {
                      this->lastNode = i;  /* ustawiamy ostatni wierzcholek z ktorego osiagnieto 0 */
                   }
-                  if(prevValue > d[mask ^ (1<<j)][j])
+
+                  if(prevValue > d[mask][i] + this->macierz[i][j])
                   {
-                     this->track[mask | (1<<j)][j] = i;
+                     this->track[mask | (1<<j)][j] = i;  /* aktualizacja wierzcholka gdy sciezka jest lepsza */
+                  }
+                  if(prevValue == d[mask][i] + this->macierz[i][j])
+                  {
+                     if(this->track[mask | (1<<j)][j] == 0)
+                        this->track[mask | (1<<j)][j] = i;
                   }
                }
             }
