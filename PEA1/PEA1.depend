@@ -24,7 +24,7 @@
 	<time.h>
 	"node.h"
 
-1634381264 source:c:\users\123\desktop\pea\part1\pea1\main.cpp
+1634388654 source:c:\users\123\desktop\pea\part1\pea1\main.cpp
 	<iostream>
 	"branchbound.h"
 	"bruteforce.h"
@@ -50,7 +50,7 @@
 1634221205 source:c:\users\123\desktop\pea\part1\pea1\bruteforce.cpp
 	"bruteforce.h"
 
-1634383029 source:c:\users\123\desktop\pea\part1\pea1\dynamicprogramming.cpp
+1634383299 source:c:\users\123\desktop\pea\part1\pea1\dynamicprogramming.cpp
 	"dynamicprogramming.h"
 
 1634326768 c:\users\123\desktop\pea\part1\pea1\dynamicprogramming.h

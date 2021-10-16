@@ -58,14 +58,6 @@ void DynamicProgramming::InitializePathArray()
       this->track[(1<<i) | 1][i] = 0;
    }
 
-   /* test sciezek
-   for(int i=0;i<(1<<this->node_num);i++)
-   {
-      for(int j=0;j<this->node_num;j++)
-         cout<<track[i][j]<<" ";
-      cout<<endl;
-   }*/
-
 	this->d[0][0] = 0;
 	Start();
 }
