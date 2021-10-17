@@ -73,14 +73,11 @@ void BranchBound::PrintSolution()
    string values;
    while(!this->finalPath.empty())
    {
-      values += to_string(finalPath.top());  /* pobieramy wierzcholek */
-      values += ' ';
+      values.insert(0,to_string(finalPath.top()) + "->");
       finalPath.pop();              /* usuwamy */
    }
 
-   reverse(values.begin(), values.end());
-
-   cout<<values<<" 0 "<<endl;
+   cout<<values<<"0"<<endl;
 }
 
 void BranchBound::SolveTSP()
@@ -93,7 +90,7 @@ void BranchBound::SolveTSP()
       checked[i] = false;                    /* inicjalizacja wartosci tablicy odwiedzonych */
       for(int j=0;j<this->node_num;j++)
       {
-         if(this->macierz[i][j] < minimum && this->macierz[i][j] != 9999)
+         if(this->macierz[i][j] < minimum && i!=j)
          {
             minimum = this->macierz[i][j];
          }
