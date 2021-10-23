@@ -84,14 +84,13 @@ void BranchBound::PrintGraph()
 
 void BranchBound::PrintSolution()
 {
-   cout<<"Minimalna dlugosc wynosi : "<<this->ograniczenieGorne<<endl;
+   cout<<"Najkrotsza sciezka : "<<this->ograniczenieGorne<<endl;
    cout<<"Sciezka : ";
-
 
    string values;
    while(!this->finalPath.empty())
    {
-      values.insert(0,to_string(finalPath.top()) + "->");
+      values.insert(0,to_string(finalPath.top()) + " - ");
       finalPath.pop();              /* usuwamy */
    }
 

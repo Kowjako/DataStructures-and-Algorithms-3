@@ -95,21 +95,24 @@ void DynamicProgramming::SetMatrixValue(int i, int j, int value)
 
 void DynamicProgramming::PrintSolution()
 {
-	cout<<"Minimalna droga wynosi: ";
+	cout<<"Najkrotsza sciezka : ";
 	cout<<d[(1<<this->node_num) - 1][0] << endl;
+
+	cout<<"Sciezka : ";
+   string values;
 
 	int prev, actual = this->lastNode, mask = (1<<this->node_num) - 1;
 
-	cout<<"0 -> "<<this->lastNode<<" -> ";
+	cout<<"0 - ";
 
    for(int i = this->node_num - 2;i>0;i--)
    {
       prev = this->track[mask][actual];
-      cout<<prev<<" -> ";
+      values.insert(0, to_string(prev) + " - ");
       mask = mask ^ (1<<actual);
       actual = prev;
    }
-   cout<<"0"<<endl;
+   cout<<values<<this->lastNode<<" - 0"<<endl;
 }
 
 
@@ -129,9 +132,10 @@ void DynamicProgramming::Start()
                prevValue = d[mask ^ (1<<j)][j]; /* poprzednia wartosc podejrzanej komorki */
                d[mask ^ (1<<j)][j] = min(d[mask ^ (1<<j)][j],d[mask][i] + this->macierz[i][j]); /* wybranie najlepszej sciezki */
 
-               /** Jezeli strzal do finalnej komorki + zmiana wartosci **/
+               /** Nastapila zmiana wartosci **/
                if(prevValue != d[mask ^ (1<<j)][j])
                {
+                  /** Jezeli strzal do finalnej komorki **/
                   if(mask ^ (1<<j) == (1<<this->node_num) - 1 && j == 0)
                   {
                      this->lastNode = i;  /* ustawiamy ostatni wierzcholek z ktorego osiagnieto 0 */
@@ -141,11 +145,12 @@ void DynamicProgramming::Start()
                   {
                      this->track[mask | (1<<j)][j] = i;  /* aktualizacja wierzcholka gdy sciezka jest lepsza */
                   }
-                  if(prevValue == d[mask][i] + this->macierz[i][j])
-                  {
-                     if(this->track[mask | (1<<j)][j] == 0)
-                        this->track[mask | (1<<j)][j] = i;
-                  }
+
+               }
+               if(prevValue == d[mask][i] + this->macierz[i][j])
+               {
+                  if(this->track[mask | (1<<j)][j] == 0)
+                     this->track[mask | (1<<j)][j] = i;
                }
             }
 			}

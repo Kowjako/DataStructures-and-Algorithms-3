@@ -88,11 +88,12 @@ void BruteForce::PrintGraph()
 void BruteForce::PrintSolution()
 {
    cout<<"Najkrotsza sciezka : "<<this->minPath<<endl;
-   cout<<"Droga : ";
+   cout<<"Sciezka : ";
    for(int i=0;i<this->node_num;i++)
    {
-      cout<<finalPermutation[i]<<" ";
+      cout<<finalPermutation[i]<<" - ";
    }
+   cout<<"0";
    cout<<endl;
 }
 
