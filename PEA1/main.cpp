@@ -41,7 +41,9 @@ int main()
                 isReaded = BB.ReadFromFile(loc);
                 if(isReaded)
                 {
+                   start = read_QPC();
                    BB.SolveTSP();
+                   elapsed = read_QPC() - start;
                    BB.PrintSolution();
                 }
                 break;
@@ -51,7 +53,9 @@ int main()
                 isReaded = BF.ReadFromFile(loc);
                 if(isReaded)
                 {
+                   start = read_QPC();
                    BF.Start();
+                   elapsed = read_QPC() - start;
                    BF.PrintSolution();
                 }
                 break;
@@ -61,13 +65,18 @@ int main()
                 isReaded = DP.ReadFromFile(loc);
                 if(isReaded)
                 {
+                   start = read_QPC();
                    DP.InitializePathArray();
+                   elapsed = read_QPC() - start;
                    DP.PrintSolution();
                 }
                 break;
             default:
                 break;
         }
+
+        cout << "Time [ms] = " << setprecision(0) << (1000.0 * elapsed) / frequency << endl;
+
     } while(operationNumber!=4);
 
     return 0;

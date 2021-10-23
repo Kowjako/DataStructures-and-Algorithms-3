@@ -12,8 +12,26 @@ BranchBound::~BranchBound()
        delete[] this->macierz;
 }
 
+void BranchBound::ClearValues()
+{
+   cout<<"Czyszczenie poprzednich wartosci ... "<<endl;
+   delete[] this->checked;
+   delete[] this->minimumTab;
+
+   for(int i=0;i<this->node_num ;i++)
+      delete[] this->macierz[i];
+   delete[] this->macierz;
+
+   this->ograniczenieGorne = INT_MAX;
+}
+
 bool BranchBound::ReadFromFile(string filename)
 {
+   if(this->node_num != 0)
+   {
+       ClearValues();
+   }
+
    ifstream file(filename);
    if(file.is_open())
    {
