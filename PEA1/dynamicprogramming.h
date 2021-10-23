@@ -23,6 +23,7 @@ class DynamicProgramming
       void InitializePathArray();
       void Start();
 
+      void ClearValues();
       bool ReadFromFile(string filename);
 
    protected:

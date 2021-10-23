@@ -23,6 +23,8 @@ class BruteForce
       void Start();
       void StartBrute(int nodeNumber);
 
+      void ClearValues();
+
    protected:
 
    private:

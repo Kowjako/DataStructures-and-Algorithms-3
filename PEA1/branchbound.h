@@ -28,6 +28,8 @@ class BranchBound
 
               void Start(Node node);
 
+              void ClearValues();
+
               bool ReadFromFile(string filename);
 
        protected:

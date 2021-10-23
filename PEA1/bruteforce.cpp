@@ -20,8 +20,26 @@ void BruteForce::SetValueForMatrix(int i, int j ,int value)
    this->macierz[i][j] = value;
 }
 
+void BruteForce::ClearValues()
+{
+   cout<<"Czyszczenie poprzednich wartosci ... "<<endl;
+   delete[] this->tmpPermutation;
+   delete[] this->finalPermutation;
+
+   for(int i=0;i<this->node_num ;i++)
+      delete[] this->macierz[i];
+   delete[] this->macierz;
+
+   this->minPath = INT_MAX;
+}
+
 bool BruteForce::ReadFromFile(string filename)
 {
+   if(this->node_num != 0)
+   {
+      ClearValues();
+   }
+
    ifstream file(filename);
    if(file.is_open())
    {

@@ -13,8 +13,25 @@ DynamicProgramming::~DynamicProgramming()
        delete[] this->macierz;
 }
 
+void DynamicProgramming::ClearValues()
+{
+   cout<<"Czyszczenie poprzednich wartosci ... "<<endl;
+
+   for(int i=0;i<this->node_num ;i++)
+      delete[] this->macierz[i];
+   delete[] this->macierz;
+
+   this->d.clear();
+   this->track.clear();
+}
+
 bool DynamicProgramming::ReadFromFile(string filename)
 {
+   if(this->node_num != 0)
+   {
+      ClearValues();
+   }
+
    ifstream file(filename);
    if(file.is_open())
    {
