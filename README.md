@@ -1,4 +1,4 @@
-# PEA - Programowanie efektywnych algorytmów 🦀
+# PEA - Projektowanie efektywnych algorytmów 🦀
 Wszystkie metody są stosowane do rozwiązania ATSP (Asymetryczny problem komiwojażera).
   
 **Na czym polega problem?**  
