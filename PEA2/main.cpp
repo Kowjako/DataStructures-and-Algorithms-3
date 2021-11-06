@@ -16,11 +16,13 @@ int main()
     if(reader.ReadFromFile(loc))
     {
        cout<<"Pomyslnie wczytano"<<endl;
-       reader.PrintGraph();
        ts.SetMatrix(reader.getMacierz(), reader.getNodeNum());
     }
 
+    ts.SetStopTime(60);
 
+    ts.StartAlgorithm();
+    ts.PrintSolution();
 
     return 0;
 }

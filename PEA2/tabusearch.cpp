@@ -40,8 +40,6 @@ vector<int> TabuSearch::CreateRandomPermutation(int permSize)
       permutation[i] = i;
    }
 
-   srand(time(NULL));  /* zeby uniknac generowania tego samego poprzez random_shuffle */
-
    random_shuffle(permutation.begin(), permutation.end());
    return permutation;
 }
@@ -57,7 +55,7 @@ int TabuSearch::CountPathLength(vector<int> path)
    return length;
 }
 
-vector<int> TabuSearch::FindPath()
+vector<int> TabuSearch::CreateStartPath()
 {
    vector<int> minPath = CreateRandomPermutation(this->nodeNum);
    vector<int> actualPath(minPath);
@@ -69,13 +67,12 @@ vector<int> TabuSearch::FindPath()
    {
       actualLength += 1;                              /* dodajemy z powrotem 1, jezeli nie bedzie lepsza sciezka to skonczymy petle */
       for(auto i = 0;i<this->nodeNum;i++)
-         for(auto j = 0;j<this->nodeNum;j++)
+         for(auto j = i;j<this->nodeNum;j++)
             if(i!=j) /* czy nie rozpatrywamy ten sam wierzcholek */
             {
-               auto tmpPathLength = 0;
                vector<int> tmpPath(actualPath);
-               swap(tmpPath(i), tmpPath(j)); /* zamieniamy miejscami wierzcholki */
-               tmpPathLength = CountPathLength(tmpPath); /*obliczamy dlugosc drogi*/
+               swap(tmpPath[i], tmpPath[j]); /* zamieniamy miejscami wierzcholki */
+               auto tmpPathLength = CountPathLength(tmpPath); /*obliczamy dlugosc drogi*/
                if(tmpPathLength < actualLength) /* jezeli jest lepsza */
                {
                   actualPath = tmpPath;
@@ -83,9 +80,125 @@ vector<int> TabuSearch::FindPath()
                }
             }
 
-      minPath = actualPath;            /* nowa minimalna sciezka */
-      minPathLength = actualLength;    /* nowa dlugosc minimalnej sciezki */
+      if(actualLength < minPathLength)
+      {
+         minPath = actualPath;            /* nowa minimalna sciezka */
+         minPathLength = actualLength;    /* nowa dlugosc minimalnej sciezki */
+         actualLength -= 1;   /* odejmujemy 1 aby znow poszukac lepszej */
+      }
    }
 
    return minPath;
+}
+
+vector<int> TabuSearch::FindNextMove(vector<int> path, int pathLength)
+{
+   int bestLength = pathLength;  /* najlepsze obecne rozwiazanie */
+   vector<int> minPath = path;
+   int minLength = INT_MAX;       /* minimalna sciezka */
+
+   for(auto i = 0;i<this->nodeNum;i++)
+      for(auto j = i+1;j<this->nodeNum;j++)
+      {
+         bool isBanned = false;
+         vector<int> actualPath;
+         for(auto a = 0;a<this->BannedMoves.size();a++)
+         {
+            if(i==this->BannedMoves[a].startNode && j==this->BannedMoves[a].finishNode)   /* kryterium aspiracji -
+            sprawdzenie ruchu zakazanego czy nie da lepsze rozwiazanie */
+            {
+               actualPath = path;
+               swap(actualPath[i],actualPath[j]);
+               int actualPathLength = CountPathLength(actualPath);
+               if(actualPathLength < bestLength && actualPathLength < minLength)
+               {
+                  minPath = actualPath;
+                  minLength = actualPathLength;
+                  bestLength = actualPathLength;
+               }
+               isBanned = true;
+               break;
+            }
+         }
+         if(!isBanned)  /* jezeli ruch jest dozwolony */
+         {
+            actualPath = path;
+            swap(actualPath[i], actualPath[j]);
+            int actualPathLength = CountPathLength(actualPath);
+            if(actualPathLength < minLength) /* jezeli koszt sciezki jest lepszy */
+            {
+               minLength = actualPathLength;
+               minPath = actualPath;
+               this->startNode = i; /* wierzcholek poczatku ruchu */
+               this->finishNode = j; /* wierzcholek konca ruchu */
+            }
+         }
+      }
+
+   return minPath;
+}
+
+void TabuSearch::StartAlgorithm()
+{
+   vector<int> bestPath = CreateStartPath();
+   cout<<"GO"<<endl;
+   vector<int> actualPath(bestPath);
+
+   double time = 0;
+   double usedTime  = 0;
+   this->frequency = this->nodeNum;
+   clock_t start = clock();
+
+   while(time <= this->stopTime)
+   {
+      actualPath = FindNextMove(bestPath, CountPathLength(bestPath));
+
+      if(CountPathLength(actualPath) < CountPathLength(bestPath))
+      {
+         cout<<"GO"<<endl;
+         bestPath = actualPath;
+         usedTime = (clock() - start) / (double)CLOCKS_PER_SEC;
+      }
+
+      Move tmp;
+      tmp.frequency = this->frequency + rand() & this->frequency;
+      tmp.startNode = (finishNode < startNode) ? finishNode : startNode;   /* jako poczatek ustawiamy mniejszy indeks */
+      tmp.finishNode = (finishNode < startNode) ? startNode : finishNode;
+      this->BannedMoves.push_back(tmp);
+
+
+      for(auto offset = 0;offset< this->BannedMoves.size();offset++)  /* sprawdzenie ruchow zakazanych */
+      {
+         if(this->BannedMoves[offset].reduceFrequency()) /* zmniejszamy czestotliwosc wystepowania ruchu */
+         {
+            this->BannedMoves.erase(this->BannedMoves.begin() + offset);   /* jezeli czestotliwosc jest 0 znaczy mozna juz odblokowac ten ruch */
+         }
+      }
+
+      time = (clock() - start) / (double)CLOCKS_PER_SEC;   /* aktualizacja czasu jaki juz minal */
+   }
+
+   this->finalPath = bestPath;
+   this->finalPathLength = CountPathLength(this->finalPath);
+   this->finalTime = usedTime;
+
+}
+
+void TabuSearch::PrintSolution()
+{
+   cout<<"Sciezka: "<<endl;
+   for(auto i =0;i<this->nodeNum;i++)
+   {
+      if(i == this->nodeNum - 1)
+      {
+         cout<<this->finalPath[i];
+      }
+      else
+      {
+         cout<<this->finalPath[i]<<" - ";
+      }
+   }
+   cout<<endl;
+   cout<<"Dlugosc: "<<this->finalPathLength<<endl;
+   cout<<"Czas rozwiazania: "<<this->finalTime<<endl;
 }

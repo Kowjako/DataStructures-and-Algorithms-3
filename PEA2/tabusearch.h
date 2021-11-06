@@ -7,6 +7,7 @@
 #include <queue>
 #include <algorithm>
 #include <stdlib.h>
+#include "move.h"
 
 using namespace std;
 
@@ -20,17 +21,27 @@ class TabuSearch
       void PrintMatrix();
       void SetStopTime(double time);
       void StartAlgorithm();
+      void PrintSolution();
 
       vector<int> CreateRandomPermutation(int permSize);
-      vector<int> FindPath();
+      vector<int> CreateStartPath();
+      vector<Move> BannedMoves;
+      vector<int> FindNextMove(vector<int> path, int pathLength);
+
       int CountPathLength(vector<int> path);
 
+      /** Results **/
+      vector<int> finalPath;
+      int finalPathLength;
+      double finalTime;
 
    protected:
 
    private:
       int** macierz;
       int nodeNum;
+      int startNode, finishNode;  /* poczatek i koniec ostatniego ruchu */
+      int frequency = 100;
       double stopTime;
 };
 
