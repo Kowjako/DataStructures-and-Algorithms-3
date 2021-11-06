@@ -19,9 +19,11 @@ class TabuSearch
       void SetMatrix(int** matrixCopy, int nodenum);
       void PrintMatrix();
       void SetStopTime(double time);
-
       void StartAlgorithm();
+
       vector<int> CreateRandomPermutation(int permSize);
+      vector<int> FindPath();
+      int CountPathLength(vector<int> path);
 
 
    protected:
