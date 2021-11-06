@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1635921640 source:c:\users\123\desktop\pea\part1\pea2\main.cpp
+	<iostream>
+
+1636207480 source:c:\users\123\desktop\pea\part1\pea2\tabusearch.cpp
+	"tabusearch.h"
+
+1636207480 c:\users\123\desktop\pea\part1\pea2\tabusearch.h
+
+1636207975 source:c:\users\123\desktop\pea\part1\pea2\graphreader.cpp
+	"graphreader.h"
+
+1636207923 c:\users\123\desktop\pea\part1\pea2\graphreader.h
+	<iostream>
+	<fstream>
+	<stack>
+	<queue>
+	<algorithm>
+	<stdlib.h>
+
