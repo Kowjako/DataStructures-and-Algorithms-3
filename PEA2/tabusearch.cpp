@@ -7,7 +7,9 @@ TabuSearch::TabuSearch()
 
 TabuSearch::~TabuSearch()
 {
-   //dtor
+   for(int i=0;i<this->nodeNum ;i++)
+        delete[] this->macierz[i];
+       delete[] this->macierz;
 }
 
 void TabuSearch::SetMatrix(int** copyMatrix, int nodenum)
@@ -67,7 +69,7 @@ vector<int> TabuSearch::CreateStartPath()
    {
       actualLength += 1;                              /* dodajemy z powrotem 1, jezeli nie bedzie lepsza sciezka to skonczymy petle */
       for(auto i = 0;i<this->nodeNum;i++)
-         for(auto j = i;j<this->nodeNum;j++)
+         for(auto j = i;j<this->nodeNum;j++)          /* j = i aby nie powtarzac tych samych permutacji */
             if(i!=j) /* czy nie rozpatrywamy ten sam wierzcholek */
             {
                vector<int> tmpPath(actualPath);
@@ -97,7 +99,7 @@ vector<int> TabuSearch::FindNextMove(vector<int> path, int pathLength)
    vector<int> minPath = path;
    int minLength = INT_MAX;       /* minimalna sciezka */
 
-   for(auto i = 0;i<this->nodeNum;i++)
+   for(auto i = 0;i<this->nodeNum - 1;i++)
       for(auto j = i+1;j<this->nodeNum;j++)
       {
          bool isBanned = false;
@@ -140,8 +142,7 @@ vector<int> TabuSearch::FindNextMove(vector<int> path, int pathLength)
 
 void TabuSearch::StartAlgorithm()
 {
-   vector<int> bestPath = CreateStartPath();
-   cout<<"GO"<<endl;
+   vector<int> bestPath =  CreateStartPath();
    vector<int> actualPath(bestPath);
 
    double time = 0;
@@ -151,18 +152,17 @@ void TabuSearch::StartAlgorithm()
 
    while(time <= this->stopTime)
    {
-      actualPath = FindNextMove(bestPath, CountPathLength(bestPath));
+      actualPath = FindNextMove(actualPath, CountPathLength(bestPath));
 
-      if(CountPathLength(actualPath) < CountPathLength(bestPath))
+      if(CountPathLength(actualPath) - CountPathLength(bestPath) < 0)   /* f-ja oceny ruchu */
       {
-         cout<<"GO"<<endl;
          bestPath = actualPath;
-         usedTime = (clock() - start) / (double)CLOCKS_PER_SEC;
+         usedTime = (clock() - start) / (double)CLOCKS_PER_SEC;   /* ustawienie czasu algorytmu (uzyteczny czas a nie calkowity) */
       }
 
       Move tmp;
       tmp.frequency = this->frequency + rand() & this->frequency;
-      tmp.startNode = (finishNode < startNode) ? finishNode : startNode;   /* jako poczatek ustawiamy mniejszy indeks */
+      tmp.startNode = (finishNode < startNode) ? finishNode : startNode;   /* Ustawiamy mniejszy indeks jako poczatek */
       tmp.finishNode = (finishNode < startNode) ? startNode : finishNode;
       this->BannedMoves.push_back(tmp);
 

@@ -19,7 +19,7 @@ int main()
        ts.SetMatrix(reader.getMacierz(), reader.getNodeNum());
     }
 
-    ts.SetStopTime(60);
+    ts.SetStopTime(600);
 
     ts.StartAlgorithm();
     ts.PrintSolution();
