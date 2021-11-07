@@ -40,8 +40,8 @@ class TabuSearch
    private:
       int** macierz;
       int nodeNum;
-      int startNode, finishNode;  /* poczatek i koniec ostatniego ruchu */
-      int frequency = 100;
+      int startNode, finishNode;  /* poczatek i koniec ostatniego lepszego ruchu */
+      int frequency;
       double stopTime;
 };
 

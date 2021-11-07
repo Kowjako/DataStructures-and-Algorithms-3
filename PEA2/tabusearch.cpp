@@ -7,9 +7,7 @@ TabuSearch::TabuSearch()
 
 TabuSearch::~TabuSearch()
 {
-   for(int i=0;i<this->nodeNum ;i++)
-        delete[] this->macierz[i];
-       delete[] this->macierz;
+   //dtor
 }
 
 void TabuSearch::SetMatrix(int** copyMatrix, int nodenum)
@@ -150,18 +148,21 @@ void TabuSearch::StartAlgorithm()
    this->frequency = this->nodeNum;
    clock_t start = clock();
 
+   int i =0;
    while(time <= this->stopTime)
    {
       actualPath = FindNextMove(actualPath, CountPathLength(bestPath));
 
       if(CountPathLength(actualPath) - CountPathLength(bestPath) < 0)   /* f-ja oceny ruchu */
       {
+         cout<<"GO " <<i<<endl;
          bestPath = actualPath;
          usedTime = (clock() - start) / (double)CLOCKS_PER_SEC;   /* ustawienie czasu algorytmu (uzyteczny czas a nie calkowity) */
+         i++;
       }
 
       Move tmp;
-      tmp.frequency = this->frequency + rand() & this->frequency;
+      tmp.frequency = this->frequency + rand() % this->frequency;
       tmp.startNode = (finishNode < startNode) ? finishNode : startNode;   /* Ustawiamy mniejszy indeks jako poczatek */
       tmp.finishNode = (finishNode < startNode) ? startNode : finishNode;
       this->BannedMoves.push_back(tmp);
