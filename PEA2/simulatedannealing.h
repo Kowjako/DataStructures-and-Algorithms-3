@@ -19,6 +19,7 @@ class SimulatedAnnealing
       void SetMatrix(int** matrixCopy, int nodenum);
       void PrintMatrix();
       void SetStopTime(double time);
+      void SetFreezingLevel(double freezing);
       void StartAlgorithm();
       void PrintSolution();
 
@@ -27,7 +28,7 @@ class SimulatedAnnealing
 
       int CountPathLength(vector<int> path);
 
-      double CountTemperature(); /* obliczanie temperatury */
+      double CountStartTemperature(); /* obliczanie temperatury startu */
       int CountMaxRepeat(); /* dlugosc epoki - ilosc prob znalezenia rozwiazania */
 
    protected:

@@ -91,8 +91,22 @@ vector<int> SimulatedAnnealing::CreateStartPath()
    return minPath;
 }
 
-int SimulatedAnnealing::CountMaxRepeat()
+double SimulatedAnnealing::CountStartTemperature() /* obliczanie poczatkowej temperatury */
 {
+   int startNode = -1, finalNode = -2; /* ustawiamy aby przynajmniej jeden raz wylosowac wierzcholki */
+
+   while(startNode == finalNode)
+   {
+      startNode = rand() % this->nodeNum;
+      finalNode = rand() % this->nodeNum;
+   }
+
+   vector<int> startPermutation = CreateRandomPermutation(this->nodeNum);
+   vector<int> newPermutation(startPermutation);
+
+   swap(newPermutation[startNode], newPermutation(finalNode));
+
+   return - (CountPathLength(startPermutation) - CountPathLength(newPermutation)) / log(0.98);  /* T(start) = - delta(F) / log(P) */
 
 }
 
