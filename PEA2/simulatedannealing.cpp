@@ -93,7 +93,7 @@ vector<int> SimulatedAnnealing::CreateStartPath()
 
 double SimulatedAnnealing::CountStartTemperature() /* obliczanie poczatkowej temperatury */
 {
-   int startNode = -1, finalNode = -2; /* ustawiamy aby przynajmniej jeden raz wylosowac wierzcholki */
+   int startNode = 0, finalNode = 0; /* ustawiamy aby przynajmniej jeden raz wylosowac wierzcholki */
 
    while(startNode == finalNode)
    {
@@ -106,7 +106,60 @@ double SimulatedAnnealing::CountStartTemperature() /* obliczanie poczatkowej tem
 
    swap(newPermutation[startNode], newPermutation(finalNode));
 
-   return - (CountPathLength(startPermutation) - CountPathLength(newPermutation)) / log(0.98);  /* T(start) = - delta(F) / log(P) */
+   return -(CountPathLength(startPermutation) - CountPathLength(newPermutation)) / log(0.98);  /* T(start) = - delta(F) / log(P) */
+}
 
+void SimulatedAnnealing::StartAlgorithm()
+{
+   this->maxRepeatCount = 50 * this->nodeNum;   /* dlugosc epoki */
+
+   double time = 0;
+   double usedTime = 0;
+   clock_t start = clock();
+
+   int startNode = 0, finalNode = 0;
+
+   vector<int> bestPath = CreateStartPath();
+   vector<int> actualPath(bestPath);
+
+   int result = INT_MAX;
+
+   while(time < this->stopTime)
+   {
+      for(auto i =0;i<this->maxRepeatCount;i++)
+      {
+         while(startNode == finalNode)
+         {
+            startNode = rand() % this->nodeNum;
+            finalNode = rand() % this->nodeNum;
+         }
+
+         swap(actualPath[startNode], actualPath[finalNode]);   /* tworzenie nowej sciezki */
+
+         int actualPathLength = CountPathLength(actualLength);
+         if(actualPathLength - result < 0)   /* funkcja oceny ruchu */
+         {
+            result = actualPathLength;
+            this->solutionPath = actualPath;
+            usedTime = (clock() - start) / (double)CLOCKS_PER_SEC;
+         }
+
+         if(CountPathLength(bestPath) - CountPathLength(actualPath) > 0)
+         {
+            bestPath = actualPath;
+         }
+         else
+         if((exp(CountPathLength(bestPath) - CountPathLength(actualPath)) / this->temperature) > (rand() / RAND_MAX)
+         {
+            bestPath = actualPath; /* akceptowanie gorszego rozwiazania */
+         }
+
+         this->temperature = this->temperature * this->freezingLevel; /* ochladzamy */
+         time = (clock() - start) / (double)CLOCKS_PER_SEC;
+      }
+   }
+
+   this->solutionTime = usedTime; /* ustawianie wartosci rozwiazania */
+   this->solutionLength = result;
 }
 

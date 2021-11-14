@@ -29,7 +29,6 @@ class SimulatedAnnealing
       int CountPathLength(vector<int> path);
 
       double CountStartTemperature(); /* obliczanie temperatury startu */
-      int CountMaxRepeat(); /* dlugosc epoki - ilosc prob znalezenia rozwiazania */
 
    protected:
 
@@ -39,6 +38,12 @@ class SimulatedAnnealing
       double stopTime;
       double temperature;
       int freezingLevel;
+      int maxRepeatCount;
+
+      /* Rozwiazania */
+      vector<int> solutionPath;
+      double solutionTime;
+      int solutionLength;
 };
 
 #endif // SIMULATEDANNEALING_H
