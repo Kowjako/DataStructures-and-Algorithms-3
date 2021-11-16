@@ -104,7 +104,7 @@ double SimulatedAnnealing::CountStartTemperature() /* obliczanie poczatkowej tem
    vector<int> startPermutation = CreateRandomPermutation(this->nodeNum);
    vector<int> newPermutation(startPermutation);
 
-   swap(newPermutation[startNode], newPermutation(finalNode));
+   swap(newPermutation[startNode], newPermutation[finalNode]);
 
    return -(CountPathLength(startPermutation) - CountPathLength(newPermutation)) / log(0.98);  /* T(start) = - delta(F) / log(P) */
 }
@@ -136,7 +136,7 @@ void SimulatedAnnealing::StartAlgorithm()
 
          swap(actualPath[startNode], actualPath[finalNode]);   /* tworzenie nowej sciezki */
 
-         int actualPathLength = CountPathLength(actualLength);
+         int actualPathLength = CountPathLength(actualPath);
          if(actualPathLength - result < 0)   /* funkcja oceny ruchu */
          {
             result = actualPathLength;
@@ -149,7 +149,7 @@ void SimulatedAnnealing::StartAlgorithm()
             bestPath = actualPath;
          }
          else
-         if((exp(CountPathLength(bestPath) - CountPathLength(actualPath)) / this->temperature) > (rand() / RAND_MAX)
+         if((exp(CountPathLength(bestPath) - CountPathLength(actualPath)) / this->temperature) > (rand() / RAND_MAX))
          {
             bestPath = actualPath; /* akceptowanie gorszego rozwiazania */
          }
