@@ -109,6 +109,11 @@ double SimulatedAnnealing::CountStartTemperature() /* obliczanie poczatkowej tem
    return -(CountPathLength(startPermutation) - CountPathLength(newPermutation)) / log(0.98);  /* T(start) = - delta(F) / log(P) */
 }
 
+void SimulatedAnnealing::SetFreezingLevel(double level)
+{
+   this->freezingLevel = level;
+}
+
 void SimulatedAnnealing::StartAlgorithm()
 {
    this->maxRepeatCount = 50 * this->nodeNum;   /* dlugosc epoki */
@@ -163,3 +168,21 @@ void SimulatedAnnealing::StartAlgorithm()
    this->solutionLength = result;
 }
 
+void SimulatedAnnealing::PrintSolution()
+{
+   cout<<"Sciezka: ";
+   for(auto i = 0; i<this->nodeNum;i++)
+   {
+      if(i==this->nodeNum - 1)
+      {
+         cout<<this->solutionPath[i];
+      }
+      else
+      {
+         cout<<this->solutionPath[i]<<"-";
+      }
+   }
+   cout<<"Dlugosc: "<<this->solutionLength<<endl;
+   cout<<"Czas: "<<this->solutionTime<<" s"<endl;
+   cout<<"Temperatura finalna "<<this->temperature<<endl;
+}
