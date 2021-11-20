@@ -146,7 +146,6 @@ void SimulatedAnnealing::StartAlgorithm()
          int actualPathLength = CountPathLength(actualPath);
          if(actualPathLength - result < 0)   /* funkcja oceny ruchu */
          {
-            cout<<"GO "<<i<<endl;
             result = actualPathLength;       /* ustawiamy biezaca dlugosc */
             this->solutionPath = actualPath; /* ustawiamy biezace najlepsze rozwiazanie */
             usedTime = (clock() - start) / (double)CLOCKS_PER_SEC;
@@ -186,6 +185,6 @@ void SimulatedAnnealing::PrintSolution()
       }
    }
    cout<<"Dlugosc: "<<this->solutionLength<<endl;
-   cout<<"Czas: "<<this->solutionTime<<" s"<<endl;
+   cout<<"Czas rozwiazania: "<<this->solutionTime<<" s"<<endl;
    cout<<"Temperatura finalna "<<this->temperature<<endl;
 }

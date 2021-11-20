@@ -53,6 +53,7 @@ int main()
                cin>>stopTime;
                break;
             case 3:
+               srand(time(NULL));
                ts.SetStopTime(stopTime);
                ts.StartAlgorithm();
                ts.PrintSolution();

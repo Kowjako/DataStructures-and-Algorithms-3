@@ -155,7 +155,6 @@ void TabuSearch::StartAlgorithm()
 
       if(CountPathLength(actualPath) - CountPathLength(bestPath) < 0)   /* f-ja oceny ruchu */
       {
-         cout<<"GO " <<i<<endl;
          bestPath = actualPath;
          usedTime = (clock() - start) / (double)CLOCKS_PER_SEC;   /* ustawienie czasu algorytmu (uzyteczny czas a nie calkowity) */
          i++;
