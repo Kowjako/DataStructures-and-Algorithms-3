@@ -1,12 +1,16 @@
 # depslib dependency file v1.0
-1637067317 source:c:\users\123\desktop\pea\part1\pea2\main.cpp
+1637421681 source:c:\users\123\desktop\pea\part1\pea2\main.cpp
 	<iostream>
 	"graphreader.h"
+	"tabusearch.h"
+	"simulatedannealing.h"
+	<windows.h>
+	<iomanip>
 
-1636283009 source:c:\users\123\desktop\pea\part1\pea2\tabusearch.cpp
+1637418175 source:c:\users\123\desktop\pea\part1\pea2\tabusearch.cpp
 	"tabusearch.h"
 
-1636281348 c:\users\123\desktop\pea\part1\pea2\tabusearch.h
+1637414638 c:\users\123\desktop\pea\part1\pea2\tabusearch.h
 	<iostream>
 	<fstream>
 	<stack>
@@ -26,8 +30,22 @@
 	<algorithm>
 	<stdlib.h>
 
-1636213043 c:\users\123\desktop\pea\part1\pea2\move.h
+1637414056 c:\users\123\desktop\pea\part1\pea2\move.h
 
-1636211371 source:c:\users\123\desktop\pea\part1\pea2\move.cpp
+1637414056 source:c:\users\123\desktop\pea\part1\pea2\move.cpp
 	"move.h"
+
+1637422053 source:c:\users\123\desktop\pea\part1\pea2\simulatedannealing.cpp
+	"simulatedannealing.h"
+
+1637420676 c:\users\123\desktop\pea\part1\pea2\simulatedannealing.h
+	<iostream>
+	<fstream>
+	<stack>
+	<queue>
+	<algorithm>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	<random>
 
