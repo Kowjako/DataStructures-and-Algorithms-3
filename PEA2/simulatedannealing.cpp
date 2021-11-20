@@ -106,7 +106,7 @@ double SimulatedAnnealing::CountStartTemperature() /* obliczanie poczatkowej tem
 
    swap(newPermutation[startNode], newPermutation[finalNode]);
 
-   return -(CountPathLength(startPermutation) - CountPathLength(newPermutation)) / log(0.98);  /* T(start) = - delta(F) / log(P) */
+   return -(double)(CountPathLength(startPermutation) - CountPathLength(newPermutation)) / log(0.98);  /* T(start) = - delta(F) / log(P) */
 }
 
 void SimulatedAnnealing::SetFreezingLevel(double level)
@@ -122,7 +122,7 @@ void SimulatedAnnealing::StartAlgorithm()
    double usedTime = 0;
    clock_t start = clock();
 
-   int startNode = 0, finalNode = 0;
+   int startNode = 0, finalNode = 0;   /* ustawiamy na zero aby wylosowac do zamiany */
 
    vector<int> bestPath = CreateStartPath();
    vector<int> actualPath(bestPath);
@@ -133,7 +133,7 @@ void SimulatedAnnealing::StartAlgorithm()
    {
       for(auto i =0;i<this->maxRepeatCount;i++)
       {
-         while(startNode == finalNode)
+         while(startNode == finalNode) /* losowanie wierzcholkow do zamiany */
          {
             startNode = rand() % this->nodeNum;
             finalNode = rand() % this->nodeNum;
@@ -144,8 +144,8 @@ void SimulatedAnnealing::StartAlgorithm()
          int actualPathLength = CountPathLength(actualPath);
          if(actualPathLength - result < 0)   /* funkcja oceny ruchu */
          {
-            result = actualPathLength;
-            this->solutionPath = actualPath;
+            result = actualPathLength;       /* ustawiamy biezaca dlugosc */
+            this->solutionPath = actualPath; /* ustawiamy biezace najlepsze rozwiazanie */
             usedTime = (clock() - start) / (double)CLOCKS_PER_SEC;
          }
 
@@ -156,10 +156,10 @@ void SimulatedAnnealing::StartAlgorithm()
          else
          if((exp(CountPathLength(bestPath) - CountPathLength(actualPath)) / this->temperature) > (rand() / RAND_MAX))
          {
-            bestPath = actualPath; /* akceptowanie gorszego rozwiazania */
+            bestPath = actualPath; /* akceptowanie gorszego rozwiazania z pewnym p */
          }
 
-         this->temperature = this->temperature * this->freezingLevel; /* ochladzamy */
+         this->temperature = this->temperature * this->freezingLevel; /* ochladzamy T = aT*/
          time = (clock() - start) / (double)CLOCKS_PER_SEC;
       }
    }
@@ -183,6 +183,6 @@ void SimulatedAnnealing::PrintSolution()
       }
    }
    cout<<"Dlugosc: "<<this->solutionLength<<endl;
-   cout<<"Czas: "<<this->solutionTime<<" s"<endl;
+   cout<<"Czas: "<<this->solutionTime<<" s"<<endl;
    cout<<"Temperatura finalna "<<this->temperature<<endl;
 }
