@@ -34,7 +34,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="graphreader.cpp" />
+		<Unit filename="graphreader.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="move.cpp" />
+		<Unit filename="move.h" />
+		<Unit filename="tabusearch.cpp" />
+		<Unit filename="tabusearch.h" />
 		<Unit filename="simulatedannealing.cpp" />
 		<Unit filename="simulatedannealing.h" />
 		<Extensions>
