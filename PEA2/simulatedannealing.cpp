@@ -51,7 +51,7 @@ int SimulatedAnnealing::CountPathLength(vector<int> path)
    {
       length += this->macierz[path[i]][path[i + 1]]; /*obliczanie drogi pomiedzy kolejnymi wierzcholkami w sciezce */
    }
-   length += this->macierz[path[this->nodeNum - 1]][0]; /* dodanie odleglosci do poczatkowego */
+   length += this->macierz[path[this->nodeNum - 1]][path[0]]; /* dodanie odleglosci do poczatkowego */
    return length;
 }
 
@@ -106,7 +106,7 @@ double SimulatedAnnealing::CountStartTemperature() /* obliczanie poczatkowej tem
 
    swap(newPermutation[startNode], newPermutation[finalNode]);
 
-   return -(double)(CountPathLength(startPermutation) - CountPathLength(newPermutation)) / log(0.98);  /* T(start) = - delta(F) / log(P) */
+   return abs((double)(CountPathLength(startPermutation) - CountPathLength(newPermutation)) / log(0.99));  /* T(start) = delta(F) / log(P) */
 }
 
 void SimulatedAnnealing::SetFreezingLevel(double level)
@@ -116,7 +116,8 @@ void SimulatedAnnealing::SetFreezingLevel(double level)
 
 void SimulatedAnnealing::StartAlgorithm()
 {
-   this->maxRepeatCount = 50 * this->nodeNum;   /* dlugosc epoki */
+   this->maxRepeatCount = 100 * this->nodeNum;   /* dlugosc epoki */
+   this->temperature = CountStartTemperature();    /* ustawienie poczatkowej temperatury */
 
    double time = 0;
    double usedTime = 0;
@@ -133,17 +134,19 @@ void SimulatedAnnealing::StartAlgorithm()
    {
       for(auto i =0;i<this->maxRepeatCount;i++)
       {
+         startNode = 0; finalNode = 0;
          while(startNode == finalNode) /* losowanie wierzcholkow do zamiany */
          {
             startNode = rand() % this->nodeNum;
             finalNode = rand() % this->nodeNum;
          }
-
+         actualPath = bestPath;
          swap(actualPath[startNode], actualPath[finalNode]);   /* tworzenie nowej sciezki */
 
          int actualPathLength = CountPathLength(actualPath);
          if(actualPathLength - result < 0)   /* funkcja oceny ruchu */
          {
+            cout<<"GO "<<i<<endl;
             result = actualPathLength;       /* ustawiamy biezaca dlugosc */
             this->solutionPath = actualPath; /* ustawiamy biezace najlepsze rozwiazanie */
             usedTime = (clock() - start) / (double)CLOCKS_PER_SEC;
@@ -154,14 +157,14 @@ void SimulatedAnnealing::StartAlgorithm()
             bestPath = actualPath;
          }
          else
-         if((exp(CountPathLength(bestPath) - CountPathLength(actualPath)) / this->temperature) > (rand() / RAND_MAX))
+         if((exp(CountPathLength(bestPath) - CountPathLength(actualPath)) / this->temperature) > ((double)rand() / RAND_MAX))
          {
             bestPath = actualPath; /* akceptowanie gorszego rozwiazania z pewnym p */
          }
-
-         this->temperature = this->temperature * this->freezingLevel; /* ochladzamy T = aT*/
-         time = (clock() - start) / (double)CLOCKS_PER_SEC;
       }
+
+      this->temperature = this->temperature * this->freezingLevel; /* ochladzamy T = aT*/
+      time = (clock() - start) / (double)CLOCKS_PER_SEC;
    }
 
    this->solutionTime = usedTime; /* ustawianie wartosci rozwiazania */

@@ -8,7 +8,8 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <math.h>
-
+#include <time.h>
+#include <random>
 using namespace std;
 
 class SimulatedAnnealing
@@ -38,7 +39,7 @@ class SimulatedAnnealing
       int nodeNum;
       double stopTime;
       double temperature;
-      int freezingLevel;
+      double freezingLevel;
       int maxRepeatCount;
 
       /* Rozwiazania */
