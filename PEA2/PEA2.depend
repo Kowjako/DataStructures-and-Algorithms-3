@@ -1,11 +1,20 @@
 # depslib dependency file v1.0
-1635921640 source:c:\users\123\desktop\pea\part1\pea2\main.cpp
+1636282916 source:c:\users\123\desktop\pea\part1\pea2\main.cpp
 	<iostream>
-
-1636207480 source:c:\users\123\desktop\pea\part1\pea2\tabusearch.cpp
+	"graphreader.h"
 	"tabusearch.h"
 
-1636207480 c:\users\123\desktop\pea\part1\pea2\tabusearch.h
+1636283009 source:c:\users\123\desktop\pea\part1\pea2\tabusearch.cpp
+	"tabusearch.h"
+
+1636281348 c:\users\123\desktop\pea\part1\pea2\tabusearch.h
+	<iostream>
+	<fstream>
+	<stack>
+	<queue>
+	<algorithm>
+	<stdlib.h>
+	"move.h"
 
 1636207975 source:c:\users\123\desktop\pea\part1\pea2\graphreader.cpp
 	"graphreader.h"
@@ -17,4 +26,9 @@
 	<queue>
 	<algorithm>
 	<stdlib.h>
+
+1636213043 c:\users\123\desktop\pea\part1\pea2\move.h
+
+1636211371 source:c:\users\123\desktop\pea\part1\pea2\move.cpp
+	"move.h"
 
