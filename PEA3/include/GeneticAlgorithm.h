@@ -26,7 +26,7 @@ class GeneticAlgorithm
 
         /* Krzyzowania */
         void CrossoverOX(vector<int> &first, vector<int> &second);  /* ustawiamy typ referencyjny */
-        void CrossoverSXX(vector<int> &first, vector<int> &second);
+        void CrossoverPMX(vector<int> &first, vector<int> &second);
 
         /* Mutacja*/
         void MutationInversion(vector<vector<int>> &element);   /* wektor populacji */
@@ -38,10 +38,12 @@ class GeneticAlgorithm
     protected:
 
     private:
+        void PMX(vector<int> &solution, vector<int> &first, vector<int> &second,
+                 int start, int finish, int x1, int x2);
+
         int** macierz;
         int nodeNum;
         double stopTime;
-
         float mutationLevel, crossoverLevel;
 
         /* Rozwiazanie */

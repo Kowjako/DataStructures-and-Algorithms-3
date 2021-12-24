@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1640347480 source:c:\users\wlodzimierz.kowjako\desktop\datastructures-and-algorithms-3\pea3\main.cpp
+1640354100 source:c:\users\wlodzimierz.kowjako\desktop\datastructures-and-algorithms-3\pea3\main.cpp
 	<iostream>
 	"graphreader.h"
 	"GeneticAlgorithm.h"
@@ -15,10 +15,10 @@
 	<algorithm>
 	<stdlib.h>
 
-1640350164 source:c:\users\wlodzimierz.kowjako\desktop\datastructures-and-algorithms-3\pea3\src\geneticalgorithm.cpp
+1640354980 source:c:\users\wlodzimierz.kowjako\desktop\datastructures-and-algorithms-3\pea3\src\geneticalgorithm.cpp
 	"GeneticAlgorithm.h"
 
-1640345023 c:\users\wlodzimierz.kowjako\desktop\datastructures-and-algorithms-3\pea3\include\geneticalgorithm.h
+1640354110 c:\users\wlodzimierz.kowjako\desktop\datastructures-and-algorithms-3\pea3\include\geneticalgorithm.h
 	<iostream>
 	<fstream>
 	<stack>

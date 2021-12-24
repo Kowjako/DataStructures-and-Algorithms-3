@@ -81,10 +81,9 @@ void GeneticAlgorithm::MutationInversion(vector<vector<int>> &element)
 
 void GeneticAlgorithm::CrossoverOX(vector<int> &first, vector<int> &second)
 {
-    this->nodeNum = 9;
     vector<int> firstNew(this->nodeNum), secondNew(this->nodeNum);  /* tworzymy wyjsciowych osobnikow */
     auto i = 0, j = 0;
-    while(i == j)
+    while(i == j)   /* losujemy indeksy do obszaru zamiany */
     {
         i = rand() % this->nodeNum;
         j = rand() % this->nodeNum;
@@ -93,13 +92,12 @@ void GeneticAlgorithm::CrossoverOX(vector<int> &first, vector<int> &second)
     i = i > j ? j : i;  /* Ustawiamy i jako mniejszy indeks aby bylo latwiej */
     j = i > j ? i : j;
 
-    copy(first.begin() + i, first.begin() + j + 1, secondNew.begin() + i); /* przenosimy czesc z pierwszego do drugiego nowego */
-    copy(second.begin() + i, second.begin() + j + 1, firstNew.begin() + i); /* przenosimy czesc z drugiego do pierwszego nowego */
+    copy(first.begin() + i, first.begin() + j + 1, secondNew.begin() + i); /* przenosimy obszar z pierwszego do drugiego nowego */
+    copy(second.begin() + i, second.begin() + j + 1, firstNew.begin() + i); /* przenosimy obszar z drugiego do pierwszego nowego */
 
     int position[2] = {j, j};
     for(auto start = j + 1; start < this->nodeNum + j + 1; start++) /* zaczynamy od kolejnego elementu po obszarze zamiany */
     {
-        cout<<first[start % this->nodeNum]<<endl;
         if(find(firstNew.begin() + i, firstNew.begin() + j + 1, first[start % this->nodeNum]) == firstNew.begin() + j + 1)    /* jezeli elementu nie ma w obszarze */
         {
             position[0]++;  /* przechodzimy do kolejnej pozycji w nowym wektorze */
@@ -118,8 +116,49 @@ void GeneticAlgorithm::CrossoverOX(vector<int> &first, vector<int> &second)
     second = secondNew;
 }
 
-void GeneticAlgorithm::CrossoverSXX(vector<int> &first, vector<int> &second)
+void GeneticAlgorithm::CrossoverPMX(vector<int> &first, vector<int> &second)
 {
+    this->nodeNum = 9;
 
+    vector<int> firstNew(this->nodeNum), secondNew(this->nodeNum);  /* tworzymy wyjsciowych osobnikow */
+    //auto i = 0, j = 0;
+//    while(i == j)   /* losujemy indeksy do obszaru zamiany */
+//    {
+//        i = rand() % this->nodeNum;
+//        j = rand() % this->nodeNum;
+//    }
+//
+//    i = i > j ? j : i;  /* Ustawiamy i jako mniejszy indeks aby bylo latwiej */
+//    j = i > j ? i : j;
+    int i = 2, j = 5;
+
+    copy(first.begin() + i, first.begin() + j + 1, secondNew.begin() + i); /* przenosimy obszar z pierwszego do drugiego nowego */
+    copy(second.begin() + i, second.begin() + j + 1, firstNew.begin() + i); /* przenosimy obszar z drugiego do pierwszego nowego */
+
+    for(auto x = 0; x < this->nodeNum; x++)
+    {
+        if(x >= i && x < j + 1) continue;  /* nie rozpatrywamy zmieniane obszaru na poczatku */
+        PMX(firstNew, second, first, i, j + 1, x, x);
+        PMX(secondNew, first, second, i, j + 1, x, x);
+    }
+
+    first = firstNew;   /* ustawiamy nowych osobnikow */
+    second = secondNew;
+}
+
+void GeneticAlgorithm::PMX(vector<int> &solution, vector<int> &first, vector<int> &second, int start, int finish, int actualPos, int changePos)
+{
+    auto assigned = true;
+    for(int i = start; i < finish; i++)
+    {
+        if(first[i] == second[actualPos])
+        {
+            assigned = false;
+            PMX(solution, first, second, start, finish, i, changePos);
+            break;
+        }
+    }
+
+    if(assigned) solution[changePos] = second[actualPos];
 }
 

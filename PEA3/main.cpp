@@ -13,7 +13,7 @@ int main()
     vector<int> test {1,2,3,4,5,6,7,8,9};
     vector<int> test2 {5, 3, 6,7,8,1,2,9,4};
 
-    GA.CrossoverOX(test, test2);
+    GA.CrossoverPMX(test, test2);
 
     for(auto i =0;i<9;i++)
         cout<<test[i]<<" ";
