@@ -10,17 +10,18 @@ GeneticAlgorithm GA;
 int main()
 {
     cout << "Hello world!" << endl;
-    vector<vector<int>> SA;
-    vector<int> test {10,9,8,7,6,5,4,3,2,1};
-    SA.push_back(test);
+    vector<int> test {1,2,3,4,5,6,7,8,9};
+    vector<int> test2 {5, 3, 6,7,8,1,2,9,4};
 
-    cout<<"START"<<endl;
-    GA.MutationInversion(SA);
+    GA.CrossoverOX(test, test2);
 
-    cout<<"OK"<<endl;
-    for(auto i =0;i<SA.size();i++)
-        for(auto j=0;j<SA.at(i).size();j++)
-            cout<<SA.at(i)[j]<<" ";
+    for(auto i =0;i<9;i++)
+        cout<<test[i]<<" ";
+
+        cout<<endl;
+
+    for(auto i =0;i<9;i++)
+        cout<<test2[i]<<" ";
 
     return 0;
 }
