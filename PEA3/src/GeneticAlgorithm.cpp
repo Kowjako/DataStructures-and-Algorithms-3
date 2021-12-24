@@ -46,4 +46,30 @@ void GeneticAlgorithm::PrintSolution()
    cout<<"Dlugosc: "<<this->solutionLength<<endl;
 }
 
+void GeneticAlgorithm::MutationInversion(vector<vector<int>> &element)
+{
+    for(auto i=0;i<element.size(); i++)
+    {
+        double p = rand() / (double)RAND_MAX;   /* wspolczynnik czy bedziemy mutowac osobnika */
+        if(p < this->mutationLevel) /* mutacja osobnika z okreslonym prawdopodobienstwem */
+        {
+            /* Algorytm mutacji-inversion */
+            auto i=0, j=0;
+            while(i==j)
+            {
+                i = rand() % this->nodeNum;
+                j = rand() % this->nodeNum;
+            }
+
+            if(i < j)
+            {
+                element.at(i).reverse(element.at(i).begin() + i, j - i);
+            }
+            else
+            {
+                element.at(i).reverse(element.at(i).begin() + j, i - j);
+            }
+        }
+    }
+}
 
