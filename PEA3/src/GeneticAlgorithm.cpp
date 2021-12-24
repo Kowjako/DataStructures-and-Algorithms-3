@@ -203,5 +203,21 @@ void GeneticAlgorithm::StartAlgorithm()
 
 void GeneticAlgorithm::TournamentSelection(vector<vector<int>> pop, int length)
 {
-
+    vector<vector<int>> actualPopulation;
+    for(auto i =0;i<this->populationSize;i++)
+    {
+        int bestLength = INT_MAX, citizenIndex, citizenFitness, bestCitizenIndex;
+        for(int j=0;j<length;j++)   /* losujemy osobnikow tyle ile wynosi dlugosc turnieju */
+        {
+            citizenIndex = rand() % pop.size(); /* losowanie osobnika */
+            citizenFitness = CountPathLength(pop[citizenIndex]); /* stopien dostosowania */
+            if(citizenFitness < bestLength)
+            {
+                bestCitizenIndex = citizenIndex;
+                bestLength = citizenFitness;
+            }
+        }
+        actualPopulation.push_back(pop[bestCitizenIndex]);  /* wstawiamy najlepiej dostosowanego osobnika */
+    }
+    pop = actualPopulation;
 }
