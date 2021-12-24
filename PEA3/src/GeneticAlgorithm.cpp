@@ -1,8 +1,10 @@
 #include "GeneticAlgorithm.h"
 
-GeneticAlgorithm::GeneticAlgorithm()
+GeneticAlgorithm::GeneticAlgorithm(double time, float mutationLevel, float crossoverLevel)
 {
-    //ctor
+    this->stopTime = time;
+    this->mutationLevel = mutationLevel;
+    this->crossoverLevel = crossoverLevel;
 }
 
 GeneticAlgorithm::~GeneticAlgorithm()
@@ -14,11 +16,6 @@ void GeneticAlgorithm::SetMatrix(int** matrixCopy, int nodenum)
 {
     this->macierz = matrixCopy;
     this->nodeNum = nodenum;
-}
-
-void GeneticAlgorithm::SetStopTime(double time)
-{
-    this->stopTime = time;
 }
 
 int GeneticAlgorithm::CountPathLength(vector<int> path)
@@ -48,3 +45,5 @@ void GeneticAlgorithm::PrintSolution()
    }
    cout<<"Dlugosc: "<<this->solutionLength<<endl;
 }
+
+

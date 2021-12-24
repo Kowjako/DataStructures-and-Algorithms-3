@@ -15,13 +15,19 @@ using namespace std;
 class GeneticAlgorithm
 {
     public:
-        GeneticAlgorithm();
+        GeneticAlgorithm(double time, float mutationLevel, float crossoverLevel);
         virtual ~GeneticAlgorithm();
 
         void SetMatrix(int** matrixCopy, int nodenum);
-        void SetStopTime(double time);  /* czas stopu */
 
         void StartAlgorithm();
+
+        /* Krzyzowania */
+        void CrossoverOX(vector<int> &first, vector<int> &second);  /* ustawiamy typ referencyjny */
+        void CrossoverSXX(vector<int> &first, vector<int> &second);
+
+        /* Mutacja*/
+        void MutationInversion(vector<vector<int>> &element);   /* wektor populacji */
 
         int CountPathLength(vector<int> path);
         void PrintSolution();
@@ -33,6 +39,8 @@ class GeneticAlgorithm
         int** macierz;
         int nodeNum;
         double stopTime;
+
+        float mutationLevel, crossoverLevel;
 
         /* Rozwiazanie */
         vector<int> solutionPath;
