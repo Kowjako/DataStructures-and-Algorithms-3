@@ -31,6 +31,11 @@ class GeneticAlgorithm
         /* Mutacja*/
         void MutationInversion(vector<vector<int>> &element);   /* wektor populacji */
 
+        /* Selekcja turniejowa*/
+        void TournamentSelection(vector<vector<int>> population, int tournamentLength);
+
+        void StartAlgorithm();
+
         int CountPathLength(vector<int> path);
         void PrintSolution();
 
@@ -42,7 +47,7 @@ class GeneticAlgorithm
                  int start, int finish, int x1, int x2);
 
         int** macierz;
-        int nodeNum;
+        int nodeNum, populationSize;
         double stopTime;
         float mutationLevel, crossoverLevel;
 
