@@ -15,7 +15,9 @@ using namespace std;
 class GeneticAlgorithm
 {
     public:
+        GeneticAlgorithm();
         GeneticAlgorithm(double time, float mutationLevel, float crossoverLevel);
+
         virtual ~GeneticAlgorithm();
 
         void SetMatrix(int** matrixCopy, int nodenum);

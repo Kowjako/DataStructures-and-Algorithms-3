@@ -1,5 +1,10 @@
 #include "GeneticAlgorithm.h"
 
+GeneticAlgorithm::GeneticAlgorithm()
+{
+    //default constructor
+}
+
 GeneticAlgorithm::GeneticAlgorithm(double time, float mutationLevel, float crossoverLevel)
 {
     this->stopTime = time;
@@ -50,24 +55,25 @@ void GeneticAlgorithm::MutationInversion(vector<vector<int>> &element)
 {
     for(auto i=0;i<element.size(); i++)
     {
+        vector<int> &tmp = element.at(i);   /* zmienna-referencyjna */
         double p = rand() / (double)RAND_MAX;   /* wspolczynnik czy bedziemy mutowac osobnika */
-        if(p < this->mutationLevel) /* mutacja osobnika z okreslonym prawdopodobienstwem */
+        if(p < 0.99) /* mutacja osobnika z okreslonym prawdopodobienstwem */
         {
             /* Algorytm mutacji-inversion */
             auto i=0, j=0;
             while(i==j)
             {
-                i = rand() % this->nodeNum;
-                j = rand() % this->nodeNum;
+                i = rand() % 10;
+                j = rand() % 10;
             }
 
             if(i < j)
             {
-                element.at(i).reverse(element.at(i).begin() + i, j - i);
+                reverse(tmp.begin() + i, tmp.begin() + j + 1);
             }
             else
             {
-                element.at(i).reverse(element.at(i).begin() + j, i - j);
+                reverse(tmp.begin() + j, tmp.begin() + i + 1);
             }
         }
     }
