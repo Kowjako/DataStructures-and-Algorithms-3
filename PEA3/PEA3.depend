@@ -2,3 +2,28 @@
 1584205420 source:c:\users\wlodzimierz.kowjako\desktop\datastructures-and-algorithms-3\pea3\main.cpp
 	<iostream>
 
+1640342271 source:c:\users\wlodzimierz.kowjako\desktop\datastructures-and-algorithms-3\pea3\src\graphreader.cpp
+	"graphreader.h"
+
+1640342255 c:\users\wlodzimierz.kowjako\desktop\datastructures-and-algorithms-3\pea3\include\graphreader.h
+	<iostream>
+	<fstream>
+	<stack>
+	<queue>
+	<algorithm>
+	<stdlib.h>
+
+1640342771 source:c:\users\wlodzimierz.kowjako\desktop\datastructures-and-algorithms-3\pea3\src\geneticalgorithm.cpp
+	"GeneticAlgorithm.h"
+
+1640342623 c:\users\wlodzimierz.kowjako\desktop\datastructures-and-algorithms-3\pea3\include\geneticalgorithm.h
+	<iostream>
+	<fstream>
+	<stack>
+	<queue>
+	<algorithm>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	<random>
+
