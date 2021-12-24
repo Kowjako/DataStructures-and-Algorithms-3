@@ -5,12 +5,13 @@ GeneticAlgorithm::GeneticAlgorithm()
     //default constructor
 }
 
-GeneticAlgorithm::GeneticAlgorithm(double time, float mutationLevel, float crossoverLevel, int populationSize)
+GeneticAlgorithm::GeneticAlgorithm(double time, float mutationLevel, float crossoverLevel, int populationSize, int selectedCrosover)
 {
     this->stopTime = time;
     this->mutationLevel = mutationLevel;
     this->crossoverLevel = crossoverLevel;
     this->populationSize = populationSize;
+    this->selectedCrossover = selectedCrosover;
 }
 
 GeneticAlgorithm::~GeneticAlgorithm()
@@ -174,7 +175,7 @@ void GeneticAlgorithm::StartAlgorithm()
     /* Tworzymy osobnika */
     for(auto i =0;i<this->nodeNum;i++)
     {
-        citize.push_back(i);
+        citizen.push_back(i);
     }
 
     /* Tworzymy populacje */
@@ -186,19 +187,29 @@ void GeneticAlgorithm::StartAlgorithm()
 
     start = clock();
 
-    while(czas < this->stopTime)
+    while(time < this->stopTime)
     {
         TournamentSelection(population, tournamentLength);
         actualPopulation = population;  /* populacja po selekcji */
         Crossover(population, actualPopulation); /* krzyzowanie */
         MutationInversion(actualPopulation); /*mutacja*/
         population = actualPopulation;
-        actualPopulation.erase();
+        actualPopulation.clear();
         FindBestCitizen(population);
         time = (clock() - start) / (double)CLOCKS_PER_SEC;
     }
 
     PrintSolution();
+}
+
+void GeneticAlgorithm::FindBestCitizen(vector<vector<int>> pop)
+{
+
+}
+
+void GeneticAlgorithm::Crossover(vector<vector<int>> pop, vector<vector<int>> tmpPop)
+{
+
 }
 
 void GeneticAlgorithm::TournamentSelection(vector<vector<int>> pop, int length)

@@ -16,15 +16,14 @@ class GeneticAlgorithm
 {
     public:
         GeneticAlgorithm();
-        GeneticAlgorithm(double time, float mutationLevel, float crossoverLevel);
+        GeneticAlgorithm(double time, float mutationLevel, float crossoverLevel, int popSize, int selectedCrossover);
 
         virtual ~GeneticAlgorithm();
 
         void SetMatrix(int** matrixCopy, int nodenum);
 
-        void StartAlgorithm();
-
         /* Krzyzowania */
+        void Crossover(vector<vector<int>> pop, vector<vector<int>> tmpPop);
         void CrossoverOX(vector<int> &first, vector<int> &second);  /* ustawiamy typ referencyjny */
         void CrossoverPMX(vector<int> &first, vector<int> &second);
 
@@ -33,6 +32,8 @@ class GeneticAlgorithm
 
         /* Selekcja turniejowa*/
         void TournamentSelection(vector<vector<int>> population, int tournamentLength);
+
+        void FindBestCitizen(vector<vector<int>> pop);
 
         void StartAlgorithm();
 
@@ -43,11 +44,10 @@ class GeneticAlgorithm
     protected:
 
     private:
-        void PMX(vector<int> &solution, vector<int> &first, vector<int> &second,
-                 int start, int finish, int x1, int x2);
+        void PMX(vector<int> &solution, vector<int> &first, vector<int> &second,int start, int finish, int x1, int x2);
 
         int** macierz;
-        int nodeNum, populationSize;
+        int nodeNum, populationSize, selectedCrossover;
         double stopTime;
         float mutationLevel, crossoverLevel;
 
