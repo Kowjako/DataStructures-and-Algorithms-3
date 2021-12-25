@@ -71,7 +71,7 @@ void GeneticAlgorithm::MutationInversion(vector<vector<int>> &element)
 
             if(i < j)
             {
-                reverse(tmp.begin() + i, tmp.begin() + j + 1);
+                reverse(tmp.begin() + i, tmp.begin() + j + 1);  /* reverse kawalku od [i,j] */
             }
             else
             {
@@ -204,7 +204,22 @@ void GeneticAlgorithm::StartAlgorithm()
 
 void GeneticAlgorithm::FindBestCitizen(vector<vector<int>> pop)
 {
-
+    int minPathLength = INT_MAX, actualPathLength = 0;
+    vector<int> bestCitizen;
+    for(auto i =0;i<pop.size();i++)
+    {
+        actualPathLength = CountPathLength(pop[i]);
+        if(actualPathLength - minPathLength < 0)
+        {
+            minPathLength = actualPathLength;
+            bestCitizen = pop[i];
+        }
+    }
+    if(minPathLength - this->solutionLength < 0)    /* znalezlismy rozwiazanie lepsze niz dotychczas znane*/
+    {
+        this->solutionLength = minPathLength;
+        this->solutionPath = bestCitizen;
+    }
 }
 
 void GeneticAlgorithm::Crossover(vector<vector<int>> &pop, vector<vector<int>> &tmpPop)
