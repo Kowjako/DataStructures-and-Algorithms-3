@@ -23,7 +23,7 @@ class GeneticAlgorithm
         void SetMatrix(int** matrixCopy, int nodenum);
 
         /* Krzyzowania */
-        void Crossover(vector<vector<int>> pop, vector<vector<int>> tmpPop);
+        void Crossover(vector<vector<int>> &pop, vector<vector<int>> &tmpPop);
         void CrossoverOX(vector<int> &first, vector<int> &second);  /* ustawiamy typ referencyjny */
         void CrossoverPMX(vector<int> &first, vector<int> &second);
 

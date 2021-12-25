@@ -207,9 +207,36 @@ void GeneticAlgorithm::FindBestCitizen(vector<vector<int>> pop)
 
 }
 
-void GeneticAlgorithm::Crossover(vector<vector<int>> pop, vector<vector<int>> tmpPop)
+void GeneticAlgorithm::Crossover(vector<vector<int>> &pop, vector<vector<int>> &tmpPop)
 {
+    vector<int> father, mother;
+    for(auto i =0;i< pop.size() * this->crossoverLevel;i++)
+    {
+        auto x=0, y=0;  /* indeksu do losowania osobnikow */
+        while(x==y)
+        {
+            x = rand() % pop.size();
+            y = rand() % pop.size();
+        }
 
+        father = pop[x];    /* wybieramy pierwszego osobnika */
+        mother = pop[y];    /* wybieramy drugiego osobnika */
+
+        switch(this->selectedCrossover)
+        {
+            case 1:
+                CrossoverOX(father, mother);
+                break;
+            case 2:
+                CrossoverPMX(father, mother);
+                break;
+            default:
+                break;
+        }
+
+        tmpPop.push_back(father);   /* typy referencyjne beda zmienione w krzyzowaniach */
+        tmpPop.push_back(mother);
+    }
 }
 
 void GeneticAlgorithm::TournamentSelection(vector<vector<int>> pop, int length)
