@@ -12,3 +12,6 @@ Wszystkie metody są stosowane do rozwiązania ATSP (Asymetryczny problem komiwo
  *Realizowanie metody — Etap* 2️⃣  
  💛 Metoda Tabu Search (przeszukiwanie z zakazami)  
  🧡 Metoda Simmulated Annealing (symulowane wyżarzanie)
+ 
+ *Realizowanie metody — Etap* 3️⃣    
+ 💜 Metoda Genetic Algorithm (algorytm genetyczny)
