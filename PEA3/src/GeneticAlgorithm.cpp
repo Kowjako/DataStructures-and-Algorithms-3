@@ -91,8 +91,7 @@ void GeneticAlgorithm::CrossoverOX(vector<int> &first, vector<int> &second)
         j = rand() % this->nodeNum;
     }
 
-    i = i > j ? j : i;  /* Ustawiamy i jako mniejszy indeks aby bylo latwiej */
-    j = i > j ? i : j;
+    if(i > j) swap(i,j); /* Ustawiamy i jako mniejszy indeks aby bylo latwiej */
 
     copy(first.begin() + i, first.begin() + j + 1, secondNew.begin() + i); /* przenosimy obszar z pierwszego do drugiego nowego */
     copy(second.begin() + i, second.begin() + j + 1, firstNew.begin() + i); /* przenosimy obszar z drugiego do pierwszego nowego */
@@ -128,8 +127,7 @@ void GeneticAlgorithm::CrossoverPMX(vector<int> &first, vector<int> &second)
         j = rand() % this->nodeNum;
     }
 
-    i = i > j ? j : i;  /* Ustawiamy i jako mniejszy indeks aby bylo latwiej */
-    j = i > j ? i : j;
+    if(i > j) swap(i,j); /* Ustawiamy i jako mniejszy indeks aby bylo latwiej */
 
     copy(first.begin() + i, first.begin() + j + 1, secondNew.begin() + i); /* przenosimy obszar z pierwszego do drugiego nowego */
     copy(second.begin() + i, second.begin() + j + 1, firstNew.begin() + i); /* przenosimy obszar z drugiego do pierwszego nowego */

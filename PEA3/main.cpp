@@ -5,7 +5,7 @@
 using namespace std;
 
 GraphReader reader;
-GeneticAlgorithm  GA(120.0,0.01,0.9,5000, 1);
+GeneticAlgorithm  GA(120.0,0.01,0.9,5000, 2);
 
 int main()
 {

@@ -29,12 +29,12 @@
 	<time.h>
 	<random>
 
-1640861002 source:c:\users\123\desktop\pea\part1\pea3\main.cpp
+1640862164 source:c:\users\123\desktop\pea\part1\pea3\main.cpp
 	<iostream>
 	"graphreader.h"
 	"GeneticAlgorithm.h"
 
-1640807640 c:\users\123\desktop\pea\part1\pea3\include\graphreader.h
+1640862164 c:\users\123\desktop\pea\part1\pea3\include\graphreader.h
 	<iostream>
 	<fstream>
 	<stack>
@@ -42,7 +42,7 @@
 	<algorithm>
 	<stdlib.h>
 
-1640861486 c:\users\123\desktop\pea\part1\pea3\include\geneticalgorithm.h
+1640862164 c:\users\123\desktop\pea\part1\pea3\include\geneticalgorithm.h
 	<iostream>
 	<fstream>
 	<stack>
@@ -53,9 +53,9 @@
 	<time.h>
 	<random>
 
-1640861543 source:c:\users\123\desktop\pea\part1\pea3\src\geneticalgorithm.cpp
+1640862430 source:c:\users\123\desktop\pea\part1\pea3\src\geneticalgorithm.cpp
 	"GeneticAlgorithm.h"
 
-1640807640 source:c:\users\123\desktop\pea\part1\pea3\src\graphreader.cpp
+1640862164 source:c:\users\123\desktop\pea\part1\pea3\src\graphreader.cpp
 	"graphreader.h"
 
