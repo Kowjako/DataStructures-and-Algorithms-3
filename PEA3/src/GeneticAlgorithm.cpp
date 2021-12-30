@@ -27,7 +27,7 @@ void GeneticAlgorithm::SetMatrix(int** matrixCopy, int nodenum)
 
 int GeneticAlgorithm::CountPathLength(vector<int> path)
 {
-    auto length = 0;
+   auto length = 0;
    for(auto i = 0;i<path.size() - 1;i++)
    {
       length += this->macierz[path[i]][path[i + 1]]; /*obliczanie drogi pomiedzy kolejnymi wierzcholkami w sciezce */
@@ -43,7 +43,7 @@ void GeneticAlgorithm::PrintSolution()
    {
       if(i==this->nodeNum - 1)
       {
-         cout<<this->solutionPath[i];
+         cout<<this->solutionPath[i]<<endl;
       }
       else
       {
@@ -136,7 +136,7 @@ void GeneticAlgorithm::CrossoverPMX(vector<int> &first, vector<int> &second)
 
     for(auto x = 0; x < this->nodeNum; x++)
     {
-        if(x >= i && x < j + 1) continue;  /* nie rozpatrywamy zmieniane obszary na poczatku */
+        if(x >= i && x < j + 1) continue;  /* nie rozpatrywamy wymienione na poczatku obszary */
         PMX(firstNew, second, first, i, j + 1, x, x);   /* tworzymy pierwszego nowego osobnika */
         PMX(secondNew, first, second, i, j + 1, x, x);  /* i drugiego */
     }
@@ -167,7 +167,7 @@ void GeneticAlgorithm::StartAlgorithm()
 {
     vector<vector<int>> population, actualPopulation;
     vector<int> citizen;
-    int tournamentLength = 8;
+    int tournamentLength = 5;
 
     clock_t start;
     double time = 0;
@@ -197,7 +197,10 @@ void GeneticAlgorithm::StartAlgorithm()
         actualPopulation.clear();
         FindBestCitizen(population);
         time = (clock() - start) / (double)CLOCKS_PER_SEC;
+        cout<<"OK"<<endl;
     }
+
+    cout<<"END"<<endl;
 
     PrintSolution();
 }
@@ -217,6 +220,7 @@ void GeneticAlgorithm::FindBestCitizen(vector<vector<int>> pop)
     }
     if(minPathLength - this->solutionLength < 0)    /* znalezlismy rozwiazanie lepsze niz dotychczas znane*/
     {
+        cout<<"USTAWIAMY PATH"<<endl;
         this->solutionLength = minPathLength;
         this->solutionPath = bestCitizen;
     }
@@ -227,7 +231,7 @@ void GeneticAlgorithm::Crossover(vector<vector<int>> &pop, vector<vector<int>> &
     vector<int> father, mother;
     for(auto i =0;i< pop.size() * this->crossoverLevel;i++)
     {
-        auto x=0, y=0;  /* indeksu do losowania osobnikow */
+        auto x=0, y=0;  /* indeksy do losowania osobnikow */
         while(x==y)
         {
             x = rand() % pop.size();
@@ -254,7 +258,7 @@ void GeneticAlgorithm::Crossover(vector<vector<int>> &pop, vector<vector<int>> &
     }
 }
 
-void GeneticAlgorithm::TournamentSelection(vector<vector<int>> pop, int length)
+void GeneticAlgorithm::TournamentSelection(vector<vector<int>> &pop, int length)
 {
     vector<vector<int>> actualPopulation;
     for(auto i =0;i<this->populationSize;i++)

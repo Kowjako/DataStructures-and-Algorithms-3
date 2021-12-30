@@ -27,11 +27,11 @@ class GeneticAlgorithm
         void CrossoverOX(vector<int> &first, vector<int> &second);  /* ustawiamy typ referencyjny */
         void CrossoverPMX(vector<int> &first, vector<int> &second);
 
-        /* Mutacja*/
+        /* Mutacja - inversion*/
         void MutationInversion(vector<vector<int>> &element);   /* wektor populacji */
 
         /* Selekcja turniejowa*/
-        void TournamentSelection(vector<vector<int>> population, int tournamentLength);
+        void TournamentSelection(vector<vector<int>> &population, int tournamentLength);
 
         void FindBestCitizen(vector<vector<int>> pop);
 
@@ -53,7 +53,7 @@ class GeneticAlgorithm
 
         /* Rozwiazanie */
         vector<int> solutionPath;
-        int solutionLength;
+        int solutionLength = INT_MAX;
 };
 
 #endif // GENETICALGORITHM_H
