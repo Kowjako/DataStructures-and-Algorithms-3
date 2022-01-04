@@ -19,6 +19,15 @@ GeneticAlgorithm::~GeneticAlgorithm()
     //dtor
 }
 
+void GeneticAlgorithm::SetSpecificParameters(double time, float mutationLevel, float crossoverLevel, int populationSize, int selectedCrosover)
+{
+    this->stopTime = time;
+    this->mutationLevel = mutationLevel;
+    this->crossoverLevel = crossoverLevel;
+    this->populationSize = populationSize;
+    this->selectedCrossover = selectedCrosover;
+}
+
 void GeneticAlgorithm::SetMatrix(int** matrixCopy, int nodenum)
 {
     this->macierz = matrixCopy;
@@ -195,10 +204,7 @@ void GeneticAlgorithm::StartAlgorithm()
         actualPopulation.clear();
         FindBestCitizen(population);
         time = (clock() - start) / (double)CLOCKS_PER_SEC;
-        cout<<"OK"<<endl;
     }
-
-    cout<<"END"<<endl;
 
     PrintSolution();
 }

@@ -21,6 +21,7 @@ class GeneticAlgorithm
         virtual ~GeneticAlgorithm();
 
         void SetMatrix(int** matrixCopy, int nodenum);
+        void SetSpecificParameters(double time, float mutationLevel, float crossoverLevel, int popSize, int selectedCrossover);
 
         /* Krzyzowania */
         void Crossover(vector<vector<int>> &pop, vector<vector<int>> &tmpPop);
